@@ -1,3 +1,5 @@
+$headerHeight: 70px;
+
 *
 	box-sizing: border-box
 	-moz-box-sizing: border-box
@@ -51,4 +53,23 @@ hr, .hr
 
 figure
 	margin: 0
+
+.main-content
+	display: flex
+
+	&__inner
+		height: calc(100vh - #{$headerHeight});
+		padding: 20px
+
+		&--labels
+			flex: 1
+			background: #fff
+		
+		&--snippets
+			flex: 2
+			background: #fff 
+		
+		&--detail
+			flex: 3
+
 
