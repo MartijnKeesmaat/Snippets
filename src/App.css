@@ -69,10 +69,63 @@ hr, .hr {
 figure {
   margin: 0; }
 
+body {
+  font-family: brandon_grotesque_regularRg, Helvetica, Arial, Sans-Serif;
+  color: #38415F;
+  font-weight: 400;
+  line-height: 1.6;
+  font-size: 1.9rem; }
+
+h1, h2, h3, h4, h5, h6, th {
+  font-family: Montserrat, Helvetica, Arial, Sans-Serif;
+  color: #1C1E23;
+  margin: 0 0 0.6em 0;
+  font-weight: 400;
+  line-height: 1.18; }
+
+h1, .h1 {
+  font-size: 6.4rem; }
+
+h2, .h2 {
+  font-size: 4.8rem; }
+
+h3, .h3 {
+  font-size: 3.6rem; }
+
+h4, .h4 {
+  font-size: 2.7rem; }
+
+h5, .h5 {
+  font-size: 2.2rem; }
+
+h6, .h6 {
+  font-size: 2rem;
+  color: #38415F; }
+
+p, .p {
+  margin: 0 0 1em 0;
+  max-width: 750px; }
+  p:last-child, .p:last-child {
+    margin-bottom: 0; }
+
+.font-bold {
+  color: #1C1E23;
+  font-family: brandon_grotesquebold, Helvetica, Arial, Sans-Serif; }
+
+.font-medium {
+  color: #1C1E23;
+  font-family: brandon_grotesquemedium, Helvetica, Arial, Sans-Serif; }
+
+a {
+  transition: 0.28s all ease;
+  text-decoration: none;
+  color: initial; }
+
 header {
   padding: 25px;
   display: flex;
-  justify-content: flex-end; }
+  justify-content: flex-end;
+  box-shadow: 2px 2px 40px rgba(0, 0, 0, 0.07); }
   header a {
     text-decoration: none;
     margin-right: 40px;
