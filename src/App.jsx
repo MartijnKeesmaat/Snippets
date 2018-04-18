@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header from 'components/Header.jsx';
+import Header from './components/Header';
 // import './App.css';
 
 class App extends Component {
@@ -7,7 +7,11 @@ class App extends Component {
     snippets: {}
   };
   render() {
-    return <div className="App" />;
+    return (
+      <div className="App">
+        <Header />
+      </div>
+    );
   }
 }
 
