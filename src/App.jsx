@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
-import Labels from './components/Labels';
+import Sidebar from './components/Sidebar';
 import Snippets from './components/Snippets';
 import SnippetDetail from './components/SnippetDetail';
 
@@ -13,7 +13,7 @@ class App extends Component {
       <div className="App">
         <Header />
         <main className="main-content">
-          <Labels />
+          <Sidebar />
           <Snippets />
           <SnippetDetail />
         </main>

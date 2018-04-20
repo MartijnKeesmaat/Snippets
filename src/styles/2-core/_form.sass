@@ -1,0 +1,61 @@
+textarea,
+select,
+input 
+  background: $color-white--alt
+  border: 2px solid $color-white--alt
+  transition: $transition1
+  outline: none
+  display: block
+  width: 100%
+  padding: 0.45em .9em
+  font-weight: 400
+  max-width: 300px
+  box-sizing: border-box
+  margin-bottom: 15px
+
+  &:focus
+    border-bottom: 2px solid $color-border
+
+
+input[type=submit],
+input[type=radio],
+input[type=checkbox]
+  width: initial
+
+input[type=submit] 
+  @extend .btn
+  @extend .btn--rounded
+  @extend .btn--big
+  border: none
+  margin-top: 15px
+
+label 
+  margin-bottom: 8px
+  display: block
+
+input[type=radio]~label 
+  display: initial
+
+.checkbox,
+.radio
+  display: flex
+  align-items: center
+  cursor: pointer
+  user-select: none
+
+  input[type="checkbox"],
+  input[type="radio"]
+    margin: 0 10px 0 0
+
+
+.input
+  margin-bottom: 2.5rem
+
+// Btn group
+.btn-group 
+  display: flex
+
+  .input 
+    margin: 0
+    display: inline
+
