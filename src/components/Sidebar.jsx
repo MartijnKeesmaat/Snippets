@@ -5,17 +5,40 @@ class Sidebar extends React.Component {
   descriptionRef = React.createRef();
   filesRef = React.createRef();
 
+  getCurrentDate = () => {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
+
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
+
+    return (today = dd + '/' + mm + '/' + yyyy);
+  };
+
   createSnippet = e => {
     // Stop form from submitting
     e.preventDefault();
 
+    // create new snippet
     const snippet = {
       title: this.titleRef.current.value,
       description: this.descriptionRef.current.value,
-      files: this.filesRef.current.value
+      files: [this.filesRef.current.value],
+      dateCreated: this.getCurrentDate()
     };
 
-    console.log(snippet);
+    // add snippet to state
+    this.props.addSnippet(snippet);
+
+    // reset form
+    e.currentTarget.reset();
   };
 
   render() {
