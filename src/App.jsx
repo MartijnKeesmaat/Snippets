@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Modal from 'react-awesome-modal';
 import base from '../src/initFirebase';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
@@ -9,7 +10,8 @@ import sampleSnippets from './sampleSnippets';
 class App extends Component {
   state = {
     snippets: [],
-    activeSnippet: 0
+    activeSnippet: 0,
+    visible: false
   };
 
   componentDidMount() {
@@ -39,6 +41,8 @@ class App extends Component {
     this.setState({
       snippets
     });
+
+    this.closeModal();
   };
 
   loadSampleSnippets = () => {
@@ -49,12 +53,29 @@ class App extends Component {
     console.log(this.state.snippets);
   };
 
+  openModal = () => {
+    this.setState({
+      visible: true
+    });
+  };
+
+  closeModal = () => {
+    this.setState({
+      visible: false
+    });
+  };
+
   render() {
     return (
       <div className="App">
         <Header />
         <main className="main-content">
-          <Sidebar addSnippet={this.addSnippet} />
+          <Sidebar
+            addSnippet={this.addSnippet}
+            openModal={this.openModal}
+            closeModal={this.closeModal}
+            visible={this.state.visible}
+          />
           <Snippets
             snippets={this.state.snippets}
             loadSampleSnippets={this.loadSampleSnippets}

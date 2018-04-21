@@ -1,4 +1,5 @@
 import React from 'react';
+import Modal from 'react-awesome-modal';
 
 class Sidebar extends React.Component {
   titleRef = React.createRef();
@@ -43,36 +44,56 @@ class Sidebar extends React.Component {
 
   render() {
     return (
-      <aside className="main-content__inner main-content__inner--labels">
-        <h3>Sidebar</h3>
-        <form onSubmit={this.createSnippet}>
-          <input
-            name="title"
-            ref={this.titleRef}
-            type="text"
-            placeholder="Title"
-          />
-          <textarea
-            name="description"
-            ref={this.descriptionRef}
-            placeholder="Description"
-            id=""
-            cols="20"
-            rows="5"
-          />
-          <textarea
-            name="files"
-            ref={this.filesRef}
-            placeholder="Code"
-            id=""
-            cols="30"
-            rows="10"
-          />
-          <button className="btn" type="submit">
+      <div>
+        <aside className="main-content__inner main-content__inner--labels">
+          <h3>Sidebar</h3>
+          <button className="btn" onClick={this.props.openModal}>
             Add snippet
           </button>
-        </form>
-      </aside>
+        </aside>
+
+        <Modal
+          visible={this.props.visible}
+          width="400"
+          effect="fadeInUp"
+          onClickAway={this.props.closeModal}
+        >
+          <form onSubmit={this.createSnippet} className="add-snippet-form">
+            <input
+              name="title"
+              ref={this.titleRef}
+              type="text"
+              placeholder="Title"
+            />
+            <textarea
+              name="description"
+              ref={this.descriptionRef}
+              placeholder="Description"
+              id=""
+              cols="20"
+              rows="5"
+            />
+            <textarea
+              name="files"
+              ref={this.filesRef}
+              placeholder="Code"
+              id=""
+              cols="30"
+              rows="10"
+            />
+            <button className="btn" type="submit">
+              Add snippet
+            </button>
+          </form>
+          <a
+            href="javascript:void(0);"
+            className="modal-close"
+            onClick={this.props.closeModal}
+          >
+            &times;
+          </a>
+        </Modal>
+      </div>
     );
   }
 }
