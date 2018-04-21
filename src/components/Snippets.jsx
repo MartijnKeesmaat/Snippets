@@ -11,7 +11,12 @@ class Snippets extends React.Component {
         </button>
         {this.props.snippets.length > 0 &&
           this.props.snippets.map((snippet, key) => (
-            <Snippet details={this.props.snippets[key]} />
+            <Snippet
+              key={key}
+              index={key}
+              details={this.props.snippets[key]}
+              showSnippetDetail={this.props.showSnippetDetail}
+            />
           ))}
       </div>
     );

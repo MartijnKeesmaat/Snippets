@@ -282,3 +282,8 @@ header {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 15px; }
+
+.snippet {
+  transition: .3s all ease; }
+  .snippet:hover {
+    background: #f1f1f1; }

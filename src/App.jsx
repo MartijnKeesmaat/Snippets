@@ -24,6 +24,12 @@ class App extends Component {
     });
   }
 
+  showSnippetDetail = key => {
+    this.setState({
+      activeSnippet: key
+    });
+  };
+
   addSnippet = snippet => {
     // 1. take a copy of existing state
     const snippets = [...this.state.snippets];
@@ -52,8 +58,12 @@ class App extends Component {
           <Snippets
             snippets={this.state.snippets}
             loadSampleSnippets={this.loadSampleSnippets}
+            showSnippetDetail={this.showSnippetDetail}
           />
-          <SnippetDetail snippets={this.state.snippets} />
+          <SnippetDetail
+            snippets={this.state.snippets}
+            activeSnippet={this.state.activeSnippet}
+          />
         </main>
       </div>
     );
