@@ -9,9 +9,10 @@ class Snippets extends React.Component {
         <button className="btn" onClick={this.props.loadSampleSnippets}>
           Add sample snippets
         </button>
-        {this.props.snippets.map((snippet, key) => (
-          <Snippet details={this.props.snippets[key]} />
-        ))}
+        {this.props.snippets.length > 0 &&
+          this.props.snippets.map((snippet, key) => (
+            <Snippet details={this.props.snippets[key]} />
+          ))}
       </div>
     );
   }

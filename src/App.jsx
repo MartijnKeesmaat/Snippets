@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import base from '../src/initFirebase';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Snippets from './components/Snippets';
@@ -7,8 +8,21 @@ import sampleSnippets from './sampleSnippets';
 
 class App extends Component {
   state = {
-    snippets: []
+    snippets: [],
+    activeSnippet: 0
   };
+
+  componentDidMount() {
+    // const { params } = this.props.match;
+    // const localStorageRef = localStorage.getItem(params);
+    // if (localStorage) {
+    //   this.setState({ order: JSON.parse(localStorageRef) });
+    // }
+    this.ref = base.syncState('snippets', {
+      context: this,
+      state: 'snippets'
+    });
+  }
 
   addSnippet = snippet => {
     // 1. take a copy of existing state
@@ -39,7 +53,7 @@ class App extends Component {
             snippets={this.state.snippets}
             loadSampleSnippets={this.loadSampleSnippets}
           />
-          <SnippetDetail />
+          <SnippetDetail snippets={this.state.snippets} />
         </main>
       </div>
     );
