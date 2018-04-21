@@ -1,4 +1,5 @@
 import React from 'react';
+import Snippet from './Snippet';
 
 class Snippets extends React.Component {
   render() {
@@ -9,11 +10,7 @@ class Snippets extends React.Component {
           Add sample snippets
         </button>
         {this.props.snippets.map((snippet, key) => (
-          <div key={key}>
-            <h4>{snippet.title}</h4>
-            <p>{snippet.description}</p>
-            <small>{snippet.dateCreated}</small>
-          </div>
+          <Snippet details={this.props.snippets[key]} />
         ))}
       </div>
     );
