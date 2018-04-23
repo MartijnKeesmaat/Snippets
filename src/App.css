@@ -1,3 +1,5 @@
+@import url(./styles/0-vendor/prism.css);
+@import url(./styles/0-vendor/codeFlask.css);
 /*------------------------------------*\
   #COLORS
 \*------------------------------------*/
@@ -77,6 +79,8 @@ figure {
     .main-content__inner--labels {
       flex: 1;
       background: #fff; }
+      .main-content__inner--labels a {
+        display: block; }
     .main-content__inner--snippets {
       flex: 2;
       background: #fff; }

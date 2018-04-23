@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from 'react-awesome-modal';
+import Editor from './Editor';
 
 class Sidebar extends React.Component {
   titleRef = React.createRef();
@@ -50,11 +51,20 @@ class Sidebar extends React.Component {
           <button className="btn" onClick={this.props.openModal}>
             Add snippet
           </button>
+
+          <a href="#">All snippets</a>
+          <a href="#">Starred</a>
+
+          <h4>Labels</h4>
+          <a href="#">Docs</a>
+          <a href="#">Cool</a>
+          <a href="#">Story</a>
         </aside>
 
         <Modal
-          visible={this.props.visible}
-          width="400"
+          // visible={this.props.visible}
+          visible={true}
+          width="600"
           effect="fadeInUp"
           onClickAway={this.props.closeModal}
         >
@@ -81,6 +91,9 @@ class Sidebar extends React.Component {
               cols="30"
               rows="10"
             />
+
+            <Editor />
+
             <button className="btn" type="submit">
               Add snippet
             </button>

@@ -8,9 +8,12 @@
     "npm-run-all": "^4.1.2",
     "re-base": "^3.2.2",
     "react": "^16.3.2",
+    "react-ace": "^6.1.0",
     "react-awesome-modal": "^2.0.3",
     "react-dom": "^16.3.2",
-    "react-scripts": "1.1.4"
+    "react-script-tag": "^1.1.2",
+    "react-scripts": "1.1.4",
+    "react-syntax-highlighter": "^7.0.2"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",

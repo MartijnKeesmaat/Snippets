@@ -15,11 +15,6 @@ class App extends Component {
   };
 
   componentDidMount() {
-    // const { params } = this.props.match;
-    // const localStorageRef = localStorage.getItem(params);
-    // if (localStorage) {
-    //   this.setState({ order: JSON.parse(localStorageRef) });
-    // }
     this.ref = base.syncState('snippets', {
       context: this,
       state: 'snippets'
@@ -49,8 +44,6 @@ class App extends Component {
     this.setState({
       snippets: sampleSnippets
     });
-    console.log(sampleSnippets);
-    console.log(this.state.snippets);
   };
 
   openModal = () => {
