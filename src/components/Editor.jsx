@@ -27,7 +27,7 @@ class Editor extends React.Component {
       mode: 'jsx',
       enableBasicAutocompletion: false,
       enableLiveAutocompletion: false,
-      fontSize: 14,
+      fontSize: 12,
       showGutter: true,
       showPrintMargin: true,
       highlightActiveLine: true,
@@ -44,6 +44,7 @@ class Editor extends React.Component {
           theme={this.state.theme}
           onValidate={this.onValidate}
           value={this.state.value}
+          height={'250px'}
           fontSize={this.state.fontSize}
           showPrintMargin={this.state.showPrintMargin}
           showGutter={this.state.showGutter}

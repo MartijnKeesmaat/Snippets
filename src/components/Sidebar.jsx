@@ -64,7 +64,7 @@ class Sidebar extends React.Component {
         <Modal
           // visible={this.props.visible}
           visible={true}
-          width="600"
+          width="900"
           effect="fadeInUp"
           onClickAway={this.props.closeModal}
         >
