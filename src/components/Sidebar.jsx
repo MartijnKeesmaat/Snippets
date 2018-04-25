@@ -3,6 +3,10 @@ import Modal from 'react-awesome-modal';
 import Editor from './Editor';
 
 class Sidebar extends React.Component {
+  state = {
+    data: ''
+  };
+
   titleRef = React.createRef();
   descriptionRef = React.createRef();
   filesRef = React.createRef();
@@ -21,18 +25,29 @@ class Sidebar extends React.Component {
       mm = '0' + mm;
     }
 
-    return (today = dd + '/' + mm + '/' + yyyy);
+    const d = new Date();
+    const h = d.getHours();
+    const min = d.getMinutes();
+    const sec = d.getSeconds();
+
+    return (today =
+      dd + '/' + mm + '/' + yyyy + ' ' + h + ':' + min + ':' + sec);
+  };
+
+  myCallBack = dataFromChild => {
+    console.log(dataFromChild);
+    this.state.data = dataFromChild;
   };
 
   createSnippet = e => {
     // Stop form from submitting
     e.preventDefault();
-
+    console.log(this.state.data);
     // create new snippet
     const snippet = {
       title: this.titleRef.current.value,
       description: this.descriptionRef.current.value,
-      files: [this.filesRef.current.value],
+      files: this.state.data,
       dateCreated: this.getCurrentDate()
     };
 
@@ -52,29 +67,31 @@ class Sidebar extends React.Component {
             Add snippet
           </button>
 
-          <a href="#">All snippets</a>
-          <a href="#">Starred</a>
+          <a href="">All snippets</a>
+          <a href="">Starred</a>
 
           <h4>Labels</h4>
-          <a href="#">Docs</a>
-          <a href="#">Cool</a>
-          <a href="#">Story</a>
+          <a href="">Docs</a>
+          <a href="">Cool</a>
+          <a href="">Story</a>
         </aside>
-
         <Modal
-          // visible={this.props.visible}
-          visible={true}
+          visible={this.props.visible}
           width="900"
           effect="fadeInUp"
           onClickAway={this.props.closeModal}
         >
+          <h3>Add new snippet</h3>
+
           <form onSubmit={this.createSnippet} className="add-snippet-form">
+            <label>Title</label>
             <input
               name="title"
               ref={this.titleRef}
               type="text"
               placeholder="Title"
             />
+            <label>Description</label>
             <textarea
               name="description"
               ref={this.descriptionRef}
@@ -83,26 +100,14 @@ class Sidebar extends React.Component {
               cols="20"
               rows="5"
             />
-            <textarea
-              name="files"
-              ref={this.filesRef}
-              placeholder="Code"
-              id=""
-              cols="30"
-              rows="10"
+            <Editor
+              getFileCode={this.getFileCode}
+              addSnippet={this.addSnippet}
+              callBackFromParent={this.myCallBack}
             />
-
-            <Editor />
-
-            <button className="btn" type="submit">
-              Add snippet
-            </button>
+            <button type="submit">Add snippet</button>
           </form>
-          <a
-            href="javascript:void(0);"
-            className="modal-close"
-            onClick={this.props.closeModal}
-          >
+          <a className="modal-close" onClick={this.props.closeModal}>
             &times;
           </a>
         </Modal>

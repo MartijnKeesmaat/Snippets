@@ -72,10 +72,12 @@ figure {
   margin: 0; }
 
 .main-content {
-  display: flex; }
+  display: flex;
+  overflow: hidden; }
   .main-content__inner {
     height: calc(100vh - 70px);
-    padding: 20px; }
+    padding: 20px;
+    overflow-y: scroll; }
     .main-content__inner--labels {
       flex: 1;
       background: #fff; }

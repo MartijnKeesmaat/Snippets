@@ -56,10 +56,12 @@ figure
 
 .main-content
 	display: flex
+	overflow: hidden
 
 	&__inner
 		height: calc(100vh - #{$headerHeight});
 		padding: 20px
+		overflow-y: scroll;
 
 		&--labels
 			flex: 1

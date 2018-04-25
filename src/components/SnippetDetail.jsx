@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
+import React from 'react';
 import AceEditor from 'react-ace';
 import 'brace/mode/jsx';
 
@@ -7,44 +6,34 @@ import 'brace/ext/language_tools';
 import 'brace/ext/searchbox';
 import 'brace/theme/xcode';
 
-const defaultValue = `function onLoad(editor) {
-  console.log("i've loaded");
-}`;
+const defaultValue = '';
 
 class SnippetDetail extends React.Component {
-  onChange(newValue) {
-    console.log('change', newValue);
-    this.setState({
-      value: newValue
-    });
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: defaultValue,
-      theme: 'xcode',
-      mode: 'jsx',
-      enableBasicAutocompletion: false,
-      enableLiveAutocompletion: false,
-      fontSize: 14,
-      showGutter: true,
-      showPrintMargin: true,
-      highlightActiveLine: true,
-      enableSnippets: false,
-      showLineNumbers: true
-    };
-  }
+  state = {
+    value: defaultValue,
+    theme: 'xcode',
+    mode: 'jsx',
+    enableBasicAutocompletion: false,
+    enableLiveAutocompletion: false,
+    fontSize: 14,
+    showGutter: true,
+    showPrintMargin: true,
+    highlightActiveLine: true,
+    enableSnippets: false,
+    showLineNumbers: true
+  };
 
   render() {
     const snippets = this.props.snippets;
     const asn = this.props.activeSnippet;
 
     if (this.props.snippets.length > 0) {
+      this.state.value = snippets[asn].files;
       return (
         <div className="main-content__inner main-content__inner--detail">
           <h4>{snippets[asn].title}</h4>
           <small>{snippets[asn].dateCreated}</small>
+          <p>{snippets[asn].files}</p>
           <p>{snippets[asn].description}</p>
           <AceEditor
             mode={this.state.mode}
@@ -55,6 +44,7 @@ class SnippetDetail extends React.Component {
             showPrintMargin={this.state.showPrintMargin}
             showGutter={this.state.showGutter}
             highlightActiveLine={this.state.highlightActiveLine}
+            readOnly={true}
             setOptions={{
               enableBasicAutocompletion: this.state.enableBasicAutocompletion,
               enableLiveAutocompletion: this.state.enableLiveAutocompletion,

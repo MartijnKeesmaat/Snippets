@@ -1,30 +1,46 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
+import React from 'react';
 import AceEditor from 'react-ace';
-import 'brace/mode/jsx';
 
+import 'brace/mode/jsx';
 import 'brace/ext/language_tools';
 import 'brace/ext/searchbox';
-import 'brace/theme/xcode';
+import 'brace/theme/github';
 
 const defaultValue = `function onLoad(editor) {
   console.log("i've loaded");
 }`;
 
-class Editor extends React.Component {
-  onChange(newValue) {
-    console.log('change', newValue);
-    this.setState({
-      value: newValue
-    });
-  }
+const languages = [
+  'javascript',
+  'java',
+  'python',
+  'xml',
+  'ruby',
+  'sass',
+  'markdown',
+  'mysql',
+  'json',
+  'html',
+  'handlebars',
+  'golang',
+  'csharp',
+  'elixir',
+  'typescript',
+  'css'
+];
 
+languages.forEach(lang => {
+  require(`brace/mode/${lang}`);
+  require(`brace/snippets/${lang}`);
+});
+
+class Editor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       value: defaultValue,
-      theme: 'xcode',
       mode: 'jsx',
+      theme: 'github',
       enableBasicAutocompletion: false,
       enableLiveAutocompletion: false,
       fontSize: 12,
@@ -34,11 +50,44 @@ class Editor extends React.Component {
       enableSnippets: false,
       showLineNumbers: true
     };
+    this.setMode = this.setMode.bind(this);
+    this.onChange = this.onChange.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.callBackFromParent(this.state.value);
+  }
+
+  onChange(newValue) {
+    this.setState({
+      value: newValue
+    });
+    // console.log('change', this.state.value);
+    this.props.callBackFromParent(this.state.value);
+  }
+
+  setMode(e) {
+    this.setState({
+      mode: e.target.value
+    });
   }
 
   render() {
     return (
       <div>
+        <label>Language:</label>
+        <p className="control">
+          <span className="select">
+            <select name="mode" onChange={this.setMode} value={this.state.mode}>
+              {languages.map(lang => (
+                <option key={lang} value={lang}>
+                  {lang}
+                </option>
+              ))}
+            </select>
+          </span>
+        </p>
+
         <AceEditor
           mode={this.state.mode}
           theme={this.state.theme}
@@ -49,6 +98,8 @@ class Editor extends React.Component {
           showPrintMargin={this.state.showPrintMargin}
           showGutter={this.state.showGutter}
           highlightActiveLine={this.state.highlightActiveLine}
+          editorProps={{ $blockScrolling: Infinity }}
+          onChange={this.onChange}
           setOptions={{
             enableBasicAutocompletion: this.state.enableBasicAutocompletion,
             enableLiveAutocompletion: this.state.enableLiveAutocompletion,

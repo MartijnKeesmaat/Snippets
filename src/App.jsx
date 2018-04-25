@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Modal from 'react-awesome-modal';
 import base from '../src/initFirebase';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
@@ -11,7 +10,7 @@ class App extends Component {
   state = {
     snippets: [],
     activeSnippet: 0,
-    visible: false
+    visible: true
   };
 
   componentDidMount() {
@@ -28,10 +27,11 @@ class App extends Component {
   };
 
   addSnippet = snippet => {
+    console.log(snippet);
     // 1. take a copy of existing state
     const snippets = [...this.state.snippets];
     // 2. add new snippet to snippets arr
-    snippets.push(snippet);
+    snippets.unshift(snippet);
     // Set new snippets to state
     this.setState({
       snippets
