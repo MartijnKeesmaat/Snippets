@@ -10,7 +10,7 @@ class App extends Component {
   state = {
     snippets: [],
     activeSnippet: 0,
-    visible: true
+    visible: false
   };
 
   componentDidMount() {

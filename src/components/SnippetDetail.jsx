@@ -33,7 +33,6 @@ class SnippetDetail extends React.Component {
         <div className="main-content__inner main-content__inner--detail">
           <h4>{snippets[asn].title}</h4>
           <small>{snippets[asn].dateCreated}</small>
-          <p>{snippets[asn].files}</p>
           <p>{snippets[asn].description}</p>
           <AceEditor
             mode={this.state.mode}
@@ -58,7 +57,11 @@ class SnippetDetail extends React.Component {
     }
     return (
       <div className="main-content__inner main-content__inner--detail">
-        <p>Loading..</p>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"
+          alt="Loading"
+          width="150px"
+        />
       </div>
     );
   }
