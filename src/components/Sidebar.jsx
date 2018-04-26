@@ -4,7 +4,8 @@ import Editor from './Editor';
 
 class Sidebar extends React.Component {
   state = {
-    snippetCode: ''
+    snippetCode: '',
+    fileComponents: [1]
   };
 
   titleRef = React.createRef();
@@ -40,6 +41,14 @@ class Sidebar extends React.Component {
     this.state.snippetCode = snippetCode;
   };
 
+  addFile = e => {
+    const fileComponents = this.state.fileComponents;
+    fileComponents.push(1);
+    this.setState({
+      fileComponents
+    });
+  };
+
   createSnippet = e => {
     e.preventDefault();
     const snippet = {
@@ -51,7 +60,13 @@ class Sidebar extends React.Component {
     };
     this.props.addSnippet(snippet);
     e.currentTarget.reset();
+    const filesLength = files.length;
+    return filesLength;
   };
+
+  // if filesLength <= key {
+  //   push
+  // }
 
   render() {
     return (
@@ -76,35 +91,45 @@ class Sidebar extends React.Component {
           effect="fadeInUp"
           onClickAway={this.props.closeModal}
         >
-          <h3>Add new snippet</h3>
+          <div className="modal">
+            <h3>Add new snippet</h3>
 
-          <form onSubmit={this.createSnippet} className="add-snippet-form">
-            <label>Title</label>
-            <input
-              name="title"
-              ref={this.titleRef}
-              type="text"
-              placeholder="Title"
-            />
-            <label>Description</label>
-            <textarea
-              name="description"
-              ref={this.descriptionRef}
-              placeholder="Description"
-              id=""
-              cols="20"
-              rows="5"
-            />
-            <Editor
-              getFileCode={this.getFileCode}
-              addSnippet={this.addSnippet}
-              getSnippetCode={this.getSnippetCode}
-            />
-            <button type="submit">Add snippet</button>
-          </form>
-          <a className="modal-close" onClick={this.props.closeModal}>
-            &times;
-          </a>
+            <form onSubmit={this.createSnippet} className="add-snippet-form">
+              <label>Title</label>
+              <input
+                name="title"
+                ref={this.titleRef}
+                type="text"
+                placeholder="Title"
+              />
+              <label>Description</label>
+              <textarea
+                name="description"
+                ref={this.descriptionRef}
+                placeholder="Description"
+                id=""
+                cols="20"
+                rows="5"
+              />
+
+              {this.state.fileComponents.map((code, key) => (
+                <Editor
+                  key={key}
+                  getFileCode={this.getFileCode}
+                  addSnippet={this.addSnippet}
+                  getSnippetCode={this.getSnippetCode}
+                />
+              ))}
+
+              <a onClick={this.addFile}>Add file</a>
+              <button type="submit" className="btn">
+                Add snippet
+              </button>
+            </form>
+            <a className="modal-close" onClick={this.props.closeModal}>
+              &times;
+            </a>
+          </div>
         </Modal>
       </div>
     );

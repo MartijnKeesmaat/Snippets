@@ -28,7 +28,7 @@ class SnippetDetail extends React.Component {
     const asn = this.props.activeSnippet;
 
     if (this.props.snippets.length > 0) {
-      this.state.value = snippets[asn].files;
+      this.state.value = snippets[asn].files[0];
       return (
         <div className="main-content__inner main-content__inner--detail">
           <h4>{snippets[asn].title}</h4>
