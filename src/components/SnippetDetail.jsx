@@ -33,6 +33,7 @@ class SnippetDetail extends React.Component {
         <div className="main-content__inner main-content__inner--detail">
           <h4>{snippets[asn].title}</h4>
           <small>{snippets[asn].dateCreated}</small>
+          <small>{snippets[asn].timeCreated}</small>
           <p>{snippets[asn].description}</p>
           <AceEditor
             mode={this.state.mode}

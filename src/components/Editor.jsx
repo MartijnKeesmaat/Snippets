@@ -55,15 +55,15 @@ class Editor extends React.Component {
   }
 
   componentDidMount() {
-    this.props.callBackFromParent(this.state.value);
+    this.props.getSnippetCode(this.state.value);
   }
 
   onChange(newValue) {
+    const value = this.state.value;
     this.setState({
       value: newValue
     });
-    // console.log('change', this.state.value);
-    this.props.callBackFromParent(this.state.value);
+    this.props.getSnippetCode(this.state.value);
   }
 
   setMode(e) {

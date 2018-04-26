@@ -15,10 +15,6 @@ class Snippets extends React.Component {
               showSnippetDetail={this.props.showSnippetDetail}
             />
           ))}
-
-        {/* <button className="btn" onClick={this.props.loadSampleSnippets}>
-          Add sample snippets
-        </button> */}
       </div>
     );
   }

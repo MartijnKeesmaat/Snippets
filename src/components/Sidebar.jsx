@@ -4,7 +4,7 @@ import Editor from './Editor';
 
 class Sidebar extends React.Component {
   state = {
-    data: ''
+    snippetCode: ''
   };
 
   titleRef = React.createRef();
@@ -25,36 +25,31 @@ class Sidebar extends React.Component {
       mm = '0' + mm;
     }
 
+    return (today = dd + '/' + mm + '/' + yyyy);
+  };
+
+  getCurrentTime = () => {
     const d = new Date();
     const h = d.getHours();
     const min = d.getMinutes();
     const sec = d.getSeconds();
-
-    return (today =
-      dd + '/' + mm + '/' + yyyy + ' ' + h + ':' + min + ':' + sec);
+    return h + ':' + min + ':' + sec;
   };
 
-  myCallBack = dataFromChild => {
-    console.log(dataFromChild);
-    this.state.data = dataFromChild;
+  getSnippetCode = snippetCode => {
+    this.state.snippetCode = snippetCode;
   };
 
   createSnippet = e => {
-    // Stop form from submitting
     e.preventDefault();
-    console.log(this.state.data);
-    // create new snippet
     const snippet = {
       title: this.titleRef.current.value,
       description: this.descriptionRef.current.value,
-      files: this.state.data,
-      dateCreated: this.getCurrentDate()
+      files: [this.state.snippetCode],
+      dateCreated: this.getCurrentDate(),
+      timeCreated: this.getCurrentTime()
     };
-
-    // add snippet to state
     this.props.addSnippet(snippet);
-
-    // reset form
     e.currentTarget.reset();
   };
 
@@ -103,7 +98,7 @@ class Sidebar extends React.Component {
             <Editor
               getFileCode={this.getFileCode}
               addSnippet={this.addSnippet}
-              callBackFromParent={this.myCallBack}
+              getSnippetCode={this.getSnippetCode}
             />
             <button type="submit">Add snippet</button>
           </form>
