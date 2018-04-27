@@ -95,6 +95,7 @@ class Sidebar extends React.Component {
                 ref={this.titleRef}
                 type="text"
                 placeholder="Title"
+                required
               />
               <label>Description</label>
               <textarea
@@ -108,6 +109,7 @@ class Sidebar extends React.Component {
 
               {this.state.fileComponents.map((code, key) => (
                 <Editor
+                  required
                   key={key}
                   index={key}
                   getFileCode={this.getFileCode}

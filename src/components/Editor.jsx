@@ -6,9 +6,7 @@ import 'brace/ext/language_tools';
 import 'brace/ext/searchbox';
 import 'brace/theme/github';
 
-const defaultValue = `function onLoad(editor) {
-  console.log("i've loaded");
-}`;
+const defaultValue = `//code here`;
 
 const languages = [
   'javascript',
@@ -53,10 +51,6 @@ class Editor extends React.Component {
     this.setMode = this.setMode.bind(this);
     this.onChange = this.onChange.bind(this);
   }
-
-  // componentDidMount() {
-  //   this.props.getSnippetCode(this.state.value);
-  // }
 
   onChange(newValue) {
     const value = this.state.value;

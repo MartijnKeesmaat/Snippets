@@ -37,6 +37,9 @@ html {
     html {
       font-size: 56%; } }
 
+body {
+  margin: 0; }
+
 ::selection {
   background: #ee154a;
   text-shadow: 2px 1px 4px rgba(29, 29, 29, 0.5);
@@ -309,3 +312,6 @@ header {
 .modal {
   height: 80vh;
   overflow: scroll; }
+
+.editor-detail {
+  margin-bottom: 30px; }
