@@ -4,7 +4,7 @@ import Editor from './Editor';
 
 class Sidebar extends React.Component {
   state = {
-    snippetCode: '',
+    snippetCode: [''],
     fileComponents: [1]
   };
 
@@ -37,8 +37,8 @@ class Sidebar extends React.Component {
     return h + ':' + min + ':' + sec;
   };
 
-  getSnippetCode = snippetCode => {
-    this.state.snippetCode = snippetCode;
+  getSnippetCode = (snippetCode, key) => {
+    this.state.snippetCode[key] = snippetCode;
   };
 
   addFile = e => {
@@ -54,19 +54,13 @@ class Sidebar extends React.Component {
     const snippet = {
       title: this.titleRef.current.value,
       description: this.descriptionRef.current.value,
-      files: [this.state.snippetCode],
+      files: this.state.snippetCode,
       dateCreated: this.getCurrentDate(),
       timeCreated: this.getCurrentTime()
     };
     this.props.addSnippet(snippet);
     e.currentTarget.reset();
-    const filesLength = files.length;
-    return filesLength;
   };
-
-  // if filesLength <= key {
-  //   push
-  // }
 
   render() {
     return (
@@ -115,6 +109,7 @@ class Sidebar extends React.Component {
               {this.state.fileComponents.map((code, key) => (
                 <Editor
                   key={key}
+                  index={key}
                   getFileCode={this.getFileCode}
                   addSnippet={this.addSnippet}
                   getSnippetCode={this.getSnippetCode}

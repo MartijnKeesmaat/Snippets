@@ -9,7 +9,7 @@ class App extends Component {
   state = {
     snippets: [],
     activeSnippet: 0,
-    visible: true
+    visible: false
   };
 
   componentDidMount() {
@@ -33,13 +33,14 @@ class App extends Component {
 
   addSnippet = snippet => {
     console.log(snippet);
-    // const snippets = [...this.state.snippets];
-    // snippets.unshift(snippet);
-    // this.setState({
-    //   snippets
-    // });
+    console.log(snippet.files);
+    const snippets = [...this.state.snippets];
+    snippets.unshift(snippet);
+    this.setState({
+      snippets
+    });
 
-    // this.closeModal();
+    this.closeModal();
   };
 
   showSnippetDetail = key => {

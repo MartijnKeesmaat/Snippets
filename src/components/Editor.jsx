@@ -54,16 +54,16 @@ class Editor extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
 
-  componentDidMount() {
-    this.props.getSnippetCode(this.state.value);
-  }
+  // componentDidMount() {
+  //   this.props.getSnippetCode(this.state.value);
+  // }
 
   onChange(newValue) {
     const value = this.state.value;
     this.setState({
       value: newValue
     });
-    this.props.getSnippetCode(this.state.value);
+    this.props.getSnippetCode(this.state.value, this.props.index);
   }
 
   setMode(e) {

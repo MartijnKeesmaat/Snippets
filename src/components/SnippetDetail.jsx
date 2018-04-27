@@ -35,24 +35,29 @@ class SnippetDetail extends React.Component {
           <small>{snippets[asn].dateCreated}</small>
           <small>{snippets[asn].timeCreated}</small>
           <p>{snippets[asn].description}</p>
-          <AceEditor
-            mode={this.state.mode}
-            theme={this.state.theme}
-            onValidate={this.onValidate}
-            value={this.state.value}
-            fontSize={this.state.fontSize}
-            showPrintMargin={this.state.showPrintMargin}
-            showGutter={this.state.showGutter}
-            highlightActiveLine={this.state.highlightActiveLine}
-            readOnly={true}
-            setOptions={{
-              enableBasicAutocompletion: this.state.enableBasicAutocompletion,
-              enableLiveAutocompletion: this.state.enableLiveAutocompletion,
-              enableSnippets: this.state.enableSnippets,
-              showLineNumbers: this.state.showLineNumbers,
-              tabSize: 2
-            }}
-          />
+
+          {snippets[asn].files.map((key, index) => (
+            <AceEditor
+              key={key}
+              mode={this.state.mode}
+              theme={this.state.theme}
+              onValidate={this.onValidate}
+              value={snippets[asn].files[index]}
+              fontSize={this.state.fontSize}
+              showPrintMargin={this.state.showPrintMargin}
+              showGutter={this.state.showGutter}
+              height={'200px'}
+              highlightActiveLine={this.state.highlightActiveLine}
+              readOnly={true}
+              setOptions={{
+                enableBasicAutocompletion: this.state.enableBasicAutocompletion,
+                enableLiveAutocompletion: this.state.enableLiveAutocompletion,
+                enableSnippets: this.state.enableSnippets,
+                showLineNumbers: this.state.showLineNumbers,
+                tabSize: 2
+              }}
+            />
+          ))}
         </div>
       );
     }
