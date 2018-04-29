@@ -97,6 +97,10 @@ figure {
 .nav-content {
   flex: 1; }
 
+.loader {
+  width: 50px;
+  margin-top: 100px; }
+
 body {
   font-family: 'Nunito', sans-serif;
   color: #585757;
@@ -153,11 +157,12 @@ a {
   background: linear-gradient(to bottom, #949eff, #746fec);
   transition: 0.28s all ease;
   box-shadow: 1px 4px 9px rgba(0, 0, 0, 0.09), 0 4px 17px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
   border: none;
   white-space: normal;
-  padding: 0.8em 1.7em 0.7em;
+  padding: 0.9em 1.7em 0.8em;
   display: inline-block;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   border-radius: 1px;
   color: #fff;
   text-transform: uppercase;
@@ -321,14 +326,14 @@ header {
     display: flex; }
   .snippet__label {
     text-transform: uppercase;
-    font-size: 1rem;
+    font-size: 1.1rem;
     letter-spacing: .7px;
     margin-right: 12px;
     border-left: 3px solid pink;
     min-width: 100px;
     padding: .6em;
     text-align: center;
-    font-weight: 400; }
+    font-weight: 700; }
     .snippet__label--fav {
       background: linear-gradient(to right, #FDA085, #F6D365);
       border: none;
@@ -378,6 +383,10 @@ header {
   display: flex;
   justify-content: center;
   padding-top: 30px; }
+  .sidebar h3 {
+    font-weight: 600;
+    font-size: 1.8rem;
+    margin-bottom: .8em; }
   .sidebar__inner {
     height: 100%;
     display: flex;
@@ -397,10 +406,14 @@ header {
     font-size: 1.2rem;
     margin-bottom: 15px;
     font-weight: 700;
-    opacity: 0.8; }
+    opacity: 0.8;
+    transition: 0.28s all ease; }
     .sidebar__link img {
       width: 20px;
       margin-right: 20px; }
+    .sidebar__link:hover {
+      letter-spacing: 1.3px;
+      color: #949eff; }
   .sidebar__label__icon {
     width: 10px;
     height: 10px;

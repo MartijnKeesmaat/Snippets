@@ -6,6 +6,11 @@
   justify-content: center
   padding-top: 30px
 
+  h3
+    font-weight: 600
+    font-size: 1.8rem
+    margin-bottom: .8em
+
   &__inner
     height: 100%;
     display: flex;
@@ -31,10 +36,15 @@
     margin-bottom: 15px
     font-weight: 700
     opacity: 0.8
+    transition: $transition1;
 
     img
       width: 20px
       margin-right: 20px
+    
+    &:hover
+      letter-spacing: 1.3px
+      color: $color-main
 
   &__label
 

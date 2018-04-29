@@ -112,9 +112,9 @@ class SnippetDetail extends React.Component {
     return (
       <div className="main-content__inner main-content__inner--detail">
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"
+          src="http://4.bp.blogspot.com/-jpc1AQcAQgs/VC5cvqiykgI/AAAAAAAAMwE/r8lj3LcIvh8/s1600/15-10%2B~%2BGIF%2B~%2BPlease%2BWait.gif"
           alt="Loading"
-          width="150px"
+          className="loader"
         />
       </div>
     );
