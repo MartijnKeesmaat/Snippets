@@ -3,7 +3,7 @@
 \*------------------------------------*/
 
 // Colors names
-$valencia: #ee154a;
+$valencia: #949eff;
 $oxford: #1c1e23;
 $charade: #282c37;
 $bayoux: #38415f;
@@ -43,11 +43,7 @@ $scrollbar-color: $color-main;
 
 // Overlay
 $overlay: rgba(#1c1e32, 0.4);
-$overlay-vertical: linear-gradient(
-  to bottom,
-  rgba($color-overlay, 0.6),
-  rgba(0, 0, 0, 0)
-);
+$overlay-vertical: linear-gradient(to bottom, #949eff, #746fec);
 $overlay-horizontal: linear-gradient(
   to right,
   rgba($color-overlay, 0.6),
@@ -59,7 +55,7 @@ $overlay-horizontal: linear-gradient(
 \*------------------------------------*/
 
 // Fonts
-$font-header: Montserrat, Helvetica, Arial, Sans-Serif;
+$font-header: brandon_grotesquebold, Helvetica, Arial, Sans-Serif;
 $font-body: brandon_grotesque_regularRg, Helvetica, Arial, Sans-Serif;
 $font-body--medium: brandon_grotesquemedium, Helvetica, Arial, Sans-Serif;
 $font-body--bold: brandon_grotesquebold, Helvetica, Arial, Sans-Serif;

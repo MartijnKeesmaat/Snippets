@@ -23,6 +23,10 @@ class SnippetDetail extends React.Component {
     showLineNumbers: true
   };
 
+  addToFav = () => {
+    this.props.getFav(this.props.activeSnippet);
+  };
+
   render() {
     const snippets = this.props.snippets;
     const asn = this.props.activeSnippet;
@@ -31,6 +35,7 @@ class SnippetDetail extends React.Component {
       this.state.value = snippets[asn].files[0];
       return (
         <div className="main-content__inner main-content__inner--detail">
+          <button onClick={this.addToFav}>Star</button>
           <h4>{snippets[asn].title}</h4>
           <small>{snippets[asn].dateCreated} </small>
           <small>{snippets[asn].timeCreated}</small>

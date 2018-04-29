@@ -49,27 +49,35 @@ class App extends Component {
     });
   };
 
+  getFav = key => {
+    this.state.snippets[key].favorite = !this.state.snippets[key].favorite;
+    console.log(this.state.snippets[key]);
+  };
+
   render() {
     return (
       <div className="App">
-        <Header />
-        <main className="main-content">
-          <Sidebar
-            addSnippet={this.addSnippet}
-            openModal={this.openModal}
-            closeModal={this.closeModal}
-            visible={this.state.visible}
-          />
-          <Snippets
-            snippets={this.state.snippets}
-            loadSampleSnippets={this.loadSampleSnippets}
-            showSnippetDetail={this.showSnippetDetail}
-          />
-          <SnippetDetail
-            snippets={this.state.snippets}
-            activeSnippet={this.state.activeSnippet}
-          />
-        </main>
+        <Sidebar
+          addSnippet={this.addSnippet}
+          openModal={this.openModal}
+          closeModal={this.closeModal}
+          visible={this.state.visible}
+        />
+        <div className="nav-content">
+          <Header />
+          <main className="main-content">
+            <Snippets
+              snippets={this.state.snippets}
+              loadSampleSnippets={this.loadSampleSnippets}
+              showSnippetDetail={this.showSnippetDetail}
+            />
+            <SnippetDetail
+              snippets={this.state.snippets}
+              activeSnippet={this.state.activeSnippet}
+              getFav={this.getFav}
+            />
+          </main>
+        </div>
       </div>
     );
   }
