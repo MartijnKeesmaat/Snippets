@@ -5,12 +5,18 @@ class Snippets extends React.Component {
     const details = this.props.details;
     return (
       <div
-        className="snippet"
+        className="snippet card"
         onClick={() => this.props.showSnippetDetail(this.props.index)}
       >
         <h4>{details.title}</h4>
         <p>{details.description}</p>
-        <small>{details.dateCreated}</small>
+        <div className="snippet__labels">
+          <div className="card snippet__label snippet__label--fav">
+            Favorite
+          </div>
+          <div className="card snippet__label">Docs</div>
+          <div className="card snippet__label">Very nice</div>
+        </div>
       </div>
     );
   }

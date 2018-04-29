@@ -26,7 +26,6 @@ class Snippets extends React.Component {
 
     return (
       <div className="main-content__inner main-content__inner--snippets">
-        <h3>Snippets</h3>
         {this.props.snippets.length > 0 &&
           snippets.map((snippet, key) => (
             <Snippet
