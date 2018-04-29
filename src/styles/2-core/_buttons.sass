@@ -1,6 +1,7 @@
 .btn
-	background: $overlay-vertical
-	transition: $transition1
+	// background: $overlay-vertical
+	background-image: linear-gradient(to right, #949eff 0%, #746fec 51%, #c6a1f7 100%);
+	transition: $transition2 
 	box-shadow: $shadow-sm
 	font-weight: 600
 	border: none
@@ -12,12 +13,14 @@
 	color: #fff
 	text-transform: uppercase
 	letter-spacing: 0.9px
+	background-size: 200% auto
+	cursor: pointer
 
 	&:last-child
 		margin-right: 0
 
 	&:hover
-		background: $color-main--dark
+		background-position: right center;
 		box-shadow: $shadow-md
 		color: #fff
 

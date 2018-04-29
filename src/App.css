@@ -162,8 +162,8 @@ a {
   color: initial; }
 
 .btn, input[type=submit] {
-  background: linear-gradient(to bottom, #949eff, #746fec);
-  transition: 0.28s all ease;
+  background-image: linear-gradient(to right, #949eff 0%, #746fec 51%, #c6a1f7 100%);
+  transition: 0.38s all ease;
   box-shadow: 1px 4px 9px rgba(0, 0, 0, 0.09), 0 4px 17px rgba(0, 0, 0, 0.1);
   font-weight: 600;
   border: none;
@@ -174,11 +174,13 @@ a {
   border-radius: 1px;
   color: #fff;
   text-transform: uppercase;
-  letter-spacing: 0.9px; }
+  letter-spacing: 0.9px;
+  background-size: 200% auto;
+  cursor: pointer; }
   .btn:last-child, input:last-child[type=submit] {
     margin-right: 0; }
   .btn:hover, input:hover[type=submit] {
-    background: #6170ff;
+    background-position: right center;
     box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.08), 1px 8px 46px rgba(0, 0, 0, 0.09);
     color: #fff; }
 
