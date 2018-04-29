@@ -26,7 +26,7 @@ class Snippets extends React.Component {
 
     return (
       <div className="main-content__inner main-content__inner--snippets">
-        <div className="main-content__inner--snippets--child">
+        <div className="scroll-container">
           {this.props.snippets.length > 0 &&
             snippets.map((snippet, key) => (
               <Snippet
