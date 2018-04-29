@@ -1,18 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="21" viewBox="0 0 22 21">
+<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
   <defs>
-    <linearGradient id="star-c" x1="0%" y1="50%" y2="50%">
+    <linearGradient id="star-a" x1="0%" y1="50%" y2="50%">
       <stop offset="0%" stop-color="#F6D365"/>
       <stop offset="100%" stop-color="#FDA085"/>
     </linearGradient>
-    <polygon id="star-b" points="8 49.04 3.674 51.315 4.5 46.497 1 43.086 5.837 42.383 8 38 10.163 42.383 15 43.086 11.5 46.497 12.326 51.315"/>
-    <filter id="star-a" width="200%" height="205.1%" x="-50%" y="-37.6%" filterUnits="objectBoundingBox">
-      <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
-      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
-      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0.984313725   0 0 0 0 0.690196078   0 0 0 0 0.482352941  0 0 0 0.4 0"/>
-    </filter>
   </defs>
-  <g fill="none" transform="translate(3 -36)">
-    <use fill="#000" filter="url(#star-a)" xlink:href="#star-b"/>
-    <use fill="url(#star-c)" fill-rule="evenodd" xlink:href="#star-b"/>
-  </g>
+  <polygon fill="url(#star-a)" points="7 11.04 2.674 13.315 3.5 8.497 0 5.086 4.837 4.383 7 0 9.163 4.383 14 5.086 10.5 8.497 11.326 13.315"/>
 </svg>

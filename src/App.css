@@ -80,13 +80,11 @@ figure {
     padding: 20px;
     overflow-y: scroll; }
     .main-content__inner--sidebar {
-      flex: 1;
-      background: #fff; }
+      flex: 1; }
       .main-content__inner--sidebar a {
         display: block; }
     .main-content__inner--snippets {
-      flex: 2;
-      background: #fff; }
+      flex: 2; }
     .main-content__inner--detail {
       flex: 3; }
 
@@ -105,12 +103,13 @@ body {
   color: #38415f;
   font-weight: 400;
   line-height: 1.6;
-  font-size: 1.9rem; }
+  font-size: 1.9rem;
+  background: #FCFCFC; }
 
 h1, h2, h3, h4, h5, h6, th {
   font-family: brandon_grotesquebold, Helvetica, Arial, Sans-Serif;
-  color: #1c1e23;
-  margin: 0 0 0.6em 0;
+  color: #2a324e;
+  margin: 0 0 0.7em 0;
   font-weight: 400;
   line-height: 1.18; }
 
@@ -121,7 +120,7 @@ h2, .h2 {
   font-size: 4.8rem; }
 
 h3, .h3 {
-  font-size: 2.3rem; }
+  font-size: 2rem; }
 
 h4, .h4 {
   font-size: 2.7rem; }
@@ -140,11 +139,11 @@ p, .p {
     margin-bottom: 0; }
 
 .font-bold {
-  color: #1c1e23;
+  color: #2a324e;
   font-family: brandon_grotesquebold, Helvetica, Arial, Sans-Serif; }
 
 .font-medium {
-  color: #1c1e23;
+  color: #2a324e;
   font-family: brandon_grotesquemedium, Helvetica, Arial, Sans-Serif; }
 
 a {
@@ -326,7 +325,7 @@ header {
   margin-bottom: 30px; }
 
 .sidebar {
-  width: 230px;
+  width: 250px;
   position: relative;
   height: 100vh;
   display: flex;
@@ -337,3 +336,25 @@ header {
     display: flex;
     flex-direction: column;
     width: 180px; }
+  .sidebar .btn, .sidebar input[type=submit] {
+    margin-bottom: 40px; }
+  .sidebar__links {
+    margin: 0 0 35px 0; }
+    .sidebar__links--lang .sidebar__link img {
+      width: 10px; }
+  .sidebar__link {
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: .9px;
+    font-size: 1.3rem;
+    margin-bottom: 15px; }
+    .sidebar__link img {
+      width: 20px;
+      margin-right: 20px; }
+  .sidebar__label__icon {
+    width: 10px;
+    height: 10px;
+    margin-right: 20px;
+    border-radius: 50%;
+    background: pink;
+    display: inline-block; }

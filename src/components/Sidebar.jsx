@@ -74,13 +74,40 @@ class Sidebar extends React.Component {
               Add snippet
             </button>
 
-            <a href="">All snippets</a>
-            <a href="">Starred</a>
+            <div className="sidebar__links">
+              <a href="" className="sidebar__link">
+                <img src={require('../icons/code.svg')} alt="" />
+                All snippets
+              </a>
+              <a href="" className="sidebar__link">
+                <img src={require('../icons/fav.svg')} alt="" />
+                Favorites
+              </a>
+            </div>
 
-            <h4>Labels</h4>
-            <a href="">Docs</a>
-            <a href="">Cool</a>
-            <a href="">Story</a>
+            <div className="sidebar__links">
+              <h3>Labels</h3>
+              <a href="" className="sidebar__link">
+                <span className="sidebar__label__icon" />
+                All snippets
+              </a>
+              <a href="" className="sidebar__link">
+                <span className="sidebar__label__icon" />
+                Favorites
+              </a>
+            </div>
+
+            <div className="sidebar__links sidebar__links--lang">
+              <h3>Languages</h3>
+              <a href="" className="sidebar__link">
+                <img src={require('../icons/hash.svg')} alt="" />
+                All snippets
+              </a>
+              <a href="" className="sidebar__link">
+                <img src={require('../icons/hash.svg')} alt="" />
+                Favorites
+              </a>
+            </div>
           </div>
         </aside>
 
