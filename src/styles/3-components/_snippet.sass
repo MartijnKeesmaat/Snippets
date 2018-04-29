@@ -3,14 +3,15 @@
   margin-bottom: 20px
   border-radius: 3px
   padding: 25px
+  position: relative
+  z-index: 10
 
   h4
     font-size: 1.8rem
-    font-weight: 600
+    font-weight: 700
     margin-bottom: .4em
 
   p
-    font-size: 1.2rem
     max-width: 310px
 
   &__labels
@@ -34,5 +35,8 @@
       color: #fff
 
   &:hover
-    background: #f1f1f1
+    transform: scale(1.05) rotate(2deg);
+    box-shadow: 2px 2px 12px 1px rgba(#273E54, .08)
+    cursor: pointer
+
 

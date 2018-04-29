@@ -25,7 +25,7 @@ $color-black: $oxford;
 $color-black--alt: $charade;
 
 $color-header: #2a324e;
-$color-body: $bayoux;
+$color-body: #585757;
 $color-body--light: #eee8e8;
 
 $color-background: $athens-gray;
@@ -49,16 +49,6 @@ $overlay-horizontal: linear-gradient(
   rgba($color-overlay, 0.6),
   rgba(0, 0, 0, 0)
 );
-
-/*------------------------------------*\
-  #TYPOGRAHPY
-\*------------------------------------*/
-
-// Fonts
-$font-header: brandon_grotesquebold, Helvetica, Arial, Sans-Serif;
-$font-body: brandon_grotesque_regularRg, Helvetica, Arial, Sans-Serif;
-$font-body--medium: brandon_grotesquemedium, Helvetica, Arial, Sans-Serif;
-$font-body--bold: brandon_grotesquebold, Helvetica, Arial, Sans-Serif;
 
 /*------------------------------------*\
   #SHADOWS

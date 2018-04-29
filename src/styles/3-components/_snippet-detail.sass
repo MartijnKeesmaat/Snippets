@@ -1,0 +1,54 @@
+.snippet-detail
+  padding: 20px 20px 20px 10px
+  position: relative
+
+  &__top-bar
+    display: flex
+    align-items: center
+    justify-content: space-between
+
+  &__desc
+    font-size: 1.5rem
+    margin-bottom: 30px
+
+  &__time
+    &__created
+      text-transform: uppercase
+      color: $color-header
+      letter-spacing: .7px
+      margin-right: 7px
+      font-size: 1.3rem
+      font-weight: 700
+
+    &__fill
+
+    &:after
+      content: ''
+      display: block
+      background: rgba(#000, .2)
+      width: 30px
+      height: 1px
+      margin: 10px 0
+            
+  &__label-bar
+    display: flex
+    justify-content: space-between
+    align-items: center
+    margin-bottom: 30px
+
+    &__control
+      display: flex
+      align-items: center
+
+      img
+        margin-right: 20px
+        width: 40px
+    
+  &__controls
+
+    img
+      margin-left: 20px
+            
+  hr
+    margin-bottom: 30px
+    opacity: .5
