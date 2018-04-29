@@ -26,15 +26,17 @@ class Snippets extends React.Component {
 
     return (
       <div className="main-content__inner main-content__inner--snippets">
-        {this.props.snippets.length > 0 &&
-          snippets.map((snippet, key) => (
-            <Snippet
-              key={key}
-              index={key}
-              details={this.props.snippets[key]}
-              showSnippetDetail={this.props.showSnippetDetail}
-            />
-          ))}
+        <div className="main-content__inner--snippets--child">
+          {this.props.snippets.length > 0 &&
+            snippets.map((snippet, key) => (
+              <Snippet
+                key={key}
+                index={key}
+                details={this.props.snippets[key]}
+                showSnippetDetail={this.props.showSnippetDetail}
+              />
+            ))}
+        </div>
       </div>
     );
   }

@@ -80,7 +80,7 @@ class SnippetDetail extends React.Component {
             <div className="editor-detail card">
               <div className="editor-detail__top">
                 <p className="editor-detail__top__lang">Javascript</p>
-                <p className="editor-detail__copy">Copy code</p>
+                <button className="editor-detail__copy">Copy code</button>
               </div>
               <AceEditor
                 key={key}
