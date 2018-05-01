@@ -311,7 +311,8 @@ select {
 header {
   padding: 25px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   box-shadow: 2px 2px 40px rgba(0, 0, 0, 0.07);
   position: relative;
   z-index: 1;
@@ -323,6 +324,10 @@ header {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 15px; }
+  header input {
+    padding: 8px 10px;
+    max-width: 200px;
+    margin: 0; }
 
 .snippet {
   transition: .3s all ease;
