@@ -1,29 +1,15 @@
 import React from 'react';
 import Snippet from './Snippet';
+import base from '../../src/initFirebase';
+import Rebase from 're-base';
+import firebase from 'firebase';
+import { waitForSnippets } from '../helpers';
 
 class Snippets extends React.Component {
   state = {
     snippets: [],
-    initialSnippets: [
-      {
-        dateCreated: '29/04/2018',
-        description:
-          'There is a moment in the life of any aspiring astr… think about setting up your own viewing station.',
-        favorite: false,
-        files: Array(2),
-        timeCreated: '15:10:29',
-        title: 'abc'
-      },
-      {
-        dateCreated: '29/04/2018',
-        description:
-          'There is a moment in the life of any aspiring astr… think about setting up your own viewing station.',
-        favorite: false,
-        files: Array(2),
-        timeCreated: '15:10:29',
-        title: 'def'
-      }
-    ]
+    initialSnippets: [],
+    here: this
   };
 
   filterList = e => {
@@ -36,8 +22,32 @@ class Snippets extends React.Component {
     this.setState({ snippets: updatedList });
   };
 
-  componentWillMount() {
-    this.setState({ snippets: this.state.initialSnippets });
+  waitForSnippets = input => {
+    base.listenTo('snippets', {
+      context: this,
+      asArray: true,
+      then() {
+        var here = this;
+        var delay = (function() {
+          var timer = 0;
+          return function(callback, ms) {
+            clearTimeout(timer);
+            timer = setTimeout(callback, ms);
+          };
+        })();
+
+        delay(function() {
+          here.setState({
+            snippets: here.props.snippets,
+            initialSnippets: here.props.snippets
+          });
+        }, 1);
+      }
+    });
+  };
+
+  componentDidMount() {
+    this.waitForSnippets();
   }
 
   render() {
