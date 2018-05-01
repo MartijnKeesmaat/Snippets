@@ -245,12 +245,13 @@ textarea,
 select,
 input {
   background: #fff;
+  border: none;
   box-shadow: 2px 2px 5px 0 rgba(39, 62, 84, 0.11);
   transition: 0.28s all ease;
   outline: none;
   display: block;
   width: 100%;
-  padding: 0.45em .9em;
+  padding: 1em;
   font-weight: 400;
   max-width: 300px;
   box-sizing: border-box;
@@ -271,7 +272,9 @@ input[type=submit] {
 
 label {
   margin-bottom: 8px;
-  display: block; }
+  display: block;
+  font-weight: 600;
+  text-align: left; }
 
 input[type=radio] ~ label {
   display: initial; }
@@ -316,6 +319,7 @@ header {
   header a {
     text-decoration: none;
     margin-right: 40px;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 15px; }

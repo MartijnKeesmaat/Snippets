@@ -64,7 +64,7 @@ class SnippetDetail extends React.Component {
               <div className="snippet-detail__label-bar__control">
                 <img src={require('../icons/fav.svg')} alt="" />
                 <select>
-                  <option selected disabled>
+                  <option selected disabled value="label">
                     Labels
                   </option>
                   <option value="docs">Docs</option>
@@ -76,9 +76,8 @@ class SnippetDetail extends React.Component {
 
             <hr />
 
-            {/* <button onClick={this.addToFav}>Star</button> */}
             {snippets[asn].files.map((key, index) => (
-              <div className="editor-detail card">
+              <div className="editor-detail card" key={key}>
                 <div className="editor-detail__top">
                   <p className="editor-detail__top__lang">Javascript</p>
                   <button className="editor-detail__copy">Copy code</button>
