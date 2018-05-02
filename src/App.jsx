@@ -90,6 +90,18 @@ class App extends Component {
     this.setState({ initialSnippets: updatedList });
   };
 
+  showFavorites = () => {
+    let updatedList = this.state.initialSnippets;
+    updatedList = updatedList.filter(snippet => {
+      return snippet.favorite === true;
+    });
+    this.setState({ initialSnippets: updatedList });
+  };
+
+  showAllSnippets = () => {
+    this.setState({ initialSnippets: this.state.snippets });
+  };
+
   render() {
     return (
       <div className="App">
@@ -98,6 +110,8 @@ class App extends Component {
           openModal={this.openModal}
           closeModal={this.closeModal}
           visible={this.state.visible}
+          showFavorites={this.showFavorites}
+          showAllSnippets={this.showAllSnippets}
         />
         <div className="nav-content">
           <Header searchSnippets={this.searchSnippets} />
@@ -105,7 +119,6 @@ class App extends Component {
             <Snippets
               snippets={this.state.snippets}
               initialSnippets={this.state.initialSnippets}
-              loadSampleSnippets={this.loadSampleSnippets}
               showSnippetDetail={this.showSnippetDetail}
             />
             <SnippetDetail

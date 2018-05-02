@@ -75,14 +75,21 @@ class Sidebar extends React.Component {
             </button>
 
             <div className="sidebar__links">
-              <a href="" className="sidebar__link">
+              <button
+                href=""
+                onClick={this.props.showAllSnippets}
+                className="sidebar__link"
+              >
                 <img src={require('../icons/code.svg')} alt="" />
                 All snippets
-              </a>
-              <a href="" className="sidebar__link">
+              </button>
+              <button
+                onClick={this.props.showFavorites}
+                className="sidebar__link"
+              >
                 <img src={require('../icons/fav.svg')} alt="" />
                 Favorites
-              </a>
+              </button>
             </div>
 
             <div className="sidebar__links">

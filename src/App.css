@@ -434,7 +434,14 @@ header {
     margin-bottom: 15px;
     font-weight: 700;
     opacity: 0.8;
-    transition: 0.28s all ease; }
+    transition: 0.28s all ease;
+    background: none;
+    border: 0;
+    font-family: inherit;
+    padding: 0;
+    cursor: pointer; }
+    .sidebar__link:focus {
+      outline: none; }
     .sidebar__link img {
       width: 20px;
       margin-right: 20px; }
