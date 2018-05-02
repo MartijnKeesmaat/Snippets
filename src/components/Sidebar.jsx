@@ -98,7 +98,11 @@ class Sidebar extends React.Component {
               <h3>Languages</h3>
               {this.props.initialSnippets.length > 0 &&
                 this.props.languages.map((lang, key) => (
-                  <button className="sidebar__link" key={key}>
+                  <button
+                    className="sidebar__link"
+                    onClick={e => this.props.filterLanguage(e)}
+                    key={key}
+                  >
                     <img src={require('../icons/hash.svg')} alt="" />
                     {lang}
                   </button>

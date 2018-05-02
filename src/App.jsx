@@ -47,7 +47,7 @@ class App extends Component {
     let filteredLangs = [];
 
     // get every value and spread it in a new arr
-    for (let i = 0; i < this.state.initialSnippets.length; i++) {
+    for (let i = 0; i < this.state.snippets.length; i++) {
       allLangs.push(...this.state.snippets[i].languages);
     }
     // rm duplicates from combined arr
@@ -123,6 +123,26 @@ class App extends Component {
     this.setState({ initialSnippets: updatedList });
   };
 
+  filterLanguage = e => {
+    let active = false;
+    if (!active) {
+      const clickedLang = e.target.textContent;
+      let updatedList = this.state.initialSnippets;
+      updatedList = updatedList.filter(snippet => {
+        return (
+          snippet.languages[0] === clickedLang ||
+          snippet.languages[1] === clickedLang ||
+          snippet.languages[2] === clickedLang
+        );
+      });
+      this.setState({ initialSnippets: updatedList });
+    } else {
+      this.setState({ initialSnippets: this.state.snippets });
+    }
+    active = !active;
+    console.log(active);
+  };
+
   showAllSnippets = () => {
     this.setState({ initialSnippets: this.state.snippets });
   };
@@ -139,6 +159,7 @@ class App extends Component {
           showAllSnippets={this.showAllSnippets}
           initialSnippets={this.state.initialSnippets}
           languages={this.state.languages}
+          filterLanguage={this.filterLanguage}
         />
         <div className="nav-content">
           <Header searchSnippets={this.searchSnippets} />
