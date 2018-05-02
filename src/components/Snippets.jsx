@@ -3,7 +3,6 @@ import Snippet from './Snippet';
 import base from '../../src/initFirebase';
 import Rebase from 're-base';
 import firebase from 'firebase';
-import { waitForSnippets } from '../helpers';
 
 class Snippets extends React.Component {
   state = {
