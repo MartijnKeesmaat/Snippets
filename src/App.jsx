@@ -8,8 +8,33 @@ import SnippetDetail from './components/SnippetDetail';
 class App extends Component {
   state = {
     snippets: [],
+    initialSnippets: [],
+    filterSnippets: [],
     activeSnippet: 0,
     visible: false
+  };
+
+  waitForSnippets = input => {
+    base.listenTo('snippets', {
+      context: this,
+      asArray: true,
+      then() {
+        var here = this;
+        var delay = (function() {
+          var timer = 0;
+          return function(callback, ms) {
+            clearTimeout(timer);
+            timer = setTimeout(callback, ms);
+          };
+        })();
+
+        delay(function() {
+          here.setState({
+            initialSnippets: here.state.snippets
+          });
+        }, 1);
+      }
+    });
   };
 
   componentDidMount() {
@@ -17,6 +42,7 @@ class App extends Component {
       context: this,
       state: 'snippets'
     });
+    this.waitForSnippets();
   }
 
   openModal = () => {
@@ -49,9 +75,19 @@ class App extends Component {
     });
   };
 
-  getFav = key => {
-    this.state.snippets[key].favorite = !this.state.snippets[key].favorite;
-    console.log(this.state.snippets[key]);
+  searchSnippets = event => {
+    let updatedList = this.state.initialSnippets;
+    if (event.target.value.length == 0) {
+      this.setState({ initialSnippets: this.state.snippets });
+      return;
+    }
+    updatedList = updatedList.filter(snippet => {
+      return (
+        snippet.title.toLowerCase().search(event.target.value.toLowerCase()) !==
+        -1
+      );
+    });
+    this.setState({ initialSnippets: updatedList });
   };
 
   render() {
@@ -64,10 +100,11 @@ class App extends Component {
           visible={this.state.visible}
         />
         <div className="nav-content">
-          <Header />
+          <Header searchSnippets={this.searchSnippets} />
           <main className="main-content">
             <Snippets
               snippets={this.state.snippets}
+              initialSnippets={this.state.initialSnippets}
               loadSampleSnippets={this.loadSampleSnippets}
               showSnippetDetail={this.showSnippetDetail}
             />

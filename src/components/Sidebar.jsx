@@ -69,7 +69,7 @@ class Sidebar extends React.Component {
       <div>
         <aside className="sidebar card">
           <div className="sidebar__inner">
-            <h3>Sidebar</h3>
+            <h3>Snippets</h3>
             <button className="btn" onClick={this.props.openModal}>
               Add snippet
             </button>
