@@ -1,7 +1,5 @@
 import React from 'react';
 import AceEditor from 'react-ace';
-import base from '../../src/initFirebase';
-import 'brace/mode/jsx';
 import 'brace/ext/language_tools';
 import 'brace/ext/searchbox';
 import 'brace/theme/tomorrow';
@@ -104,6 +102,7 @@ class SnippetDetail extends React.Component {
                   key={key}
                   mode={this.state.mode}
                   theme={this.state.theme}
+                  editorProps={{ $blockScrolling: Infinity }}
                   onValidate={this.onValidate}
                   value={snippets[snippetIndex].files[index]}
                   fontSize={this.state.fontSize}

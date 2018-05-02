@@ -34,3 +34,9 @@ export function getCurrentTime() {
   const min = d.getMinutes();
   return h + ':' + min;
 }
+
+export function removeDuplicates(arr) {
+  let s = new Set(arr);
+  let it = s.values();
+  return Array.from(it);
+}

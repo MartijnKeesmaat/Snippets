@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Snippets from './components/Snippets';
 import SnippetDetail from './components/SnippetDetail';
+import { removeDuplicates } from './helpers';
 
 class App extends Component {
   state = {
@@ -11,13 +12,16 @@ class App extends Component {
     initialSnippets: [],
     filterSnippets: [],
     activeSnippet: 0,
+    languages: [],
     visible: false
   };
 
+  // wait for snippets to load
   waitForSnippets = input => {
     base.listenTo('snippets', {
       context: this,
       asArray: true,
+      // still waiting..
       then() {
         var here = this;
         var delay = (function() {
@@ -32,9 +36,27 @@ class App extends Component {
           here.setState({
             initialSnippets: here.state.snippets
           });
+          here.getAllLanguages();
         }, 1);
       }
     });
+  };
+
+  getAllLanguages = () => {
+    const languages = this.state.languages;
+    let allLangs = [];
+    let filteredLangs = [];
+
+    // get every value and spread it in a new arr
+    for (let i = 0; i < this.state.initialSnippets.length; i++) {
+      allLangs.push(...this.state.snippets[i].languages);
+    }
+
+    // rm duplicates from combined arr
+    filteredLangs = removeDuplicates(allLangs);
+
+    // update state
+    this.setState({ languages: filteredLangs });
   };
 
   componentDidMount() {
@@ -58,8 +80,6 @@ class App extends Component {
   };
 
   addSnippet = snippet => {
-    console.log(snippet);
-    console.log(snippet.files);
     const snippets = [...this.state.snippets];
     snippets.unshift(snippet);
     this.setState({
@@ -120,6 +140,8 @@ class App extends Component {
           visible={this.state.visible}
           showFavorites={this.showFavorites}
           showAllSnippets={this.showAllSnippets}
+          initialSnippets={this.state.initialSnippets}
+          languages={this.state.languages}
         />
         <div className="nav-content">
           <Header searchSnippets={this.searchSnippets} />
