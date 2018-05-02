@@ -90,6 +90,14 @@ class App extends Component {
     this.setState({ initialSnippets: updatedList });
   };
 
+  setFavorite = snippetIndex => {
+    let snippets = this.state.snippets;
+    snippets[snippetIndex].favorite = !snippets[snippetIndex].favorite;
+    this.setState({
+      snippets
+    });
+  };
+
   showFavorites = () => {
     let updatedList = this.state.initialSnippets;
     updatedList = updatedList.filter(snippet => {
@@ -125,6 +133,7 @@ class App extends Component {
               snippets={this.state.snippets}
               activeSnippet={this.state.activeSnippet}
               getFav={this.getFav}
+              setFavorite={this.setFavorite}
             />
           </main>
         </div>

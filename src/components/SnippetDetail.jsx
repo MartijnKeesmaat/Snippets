@@ -1,5 +1,6 @@
 import React from 'react';
 import AceEditor from 'react-ace';
+import base from '../../src/initFirebase';
 import 'brace/mode/jsx';
 import 'brace/ext/language_tools';
 import 'brace/ext/searchbox';
@@ -22,16 +23,13 @@ class SnippetDetail extends React.Component {
     showLineNumbers: true
   };
 
-  addToFav = () => {
-    this.props.getFav(this.props.activeSnippet);
-  };
-
   render() {
     const snippets = this.props.snippets;
-    const asn = this.props.activeSnippet;
+    const snippetIndex = this.props.activeSnippet;
+    const favIcon = this.state.favIcon;
 
     if (this.props.snippets.length > 0) {
-      this.state.value = snippets[asn].files[0];
+      this.state.value = snippets[snippetIndex].files[0];
       return (
         <div className="main-content__inner main-content__inner--detail snippet-detail">
           <div className="scroll-container">
@@ -39,7 +37,8 @@ class SnippetDetail extends React.Component {
               <div className="snippet-detail__time">
                 <span className="snippet-detail__time__created">Created</span>
                 <span className="snippet-detail__time__fill">
-                  {snippets[asn].dateCreated} - {snippets[asn].timeCreated}
+                  {snippets[snippetIndex].dateCreated} -
+                  {snippets[snippetIndex].timeCreated}
                 </span>
               </div>
 
@@ -49,12 +48,14 @@ class SnippetDetail extends React.Component {
               </div>
             </div>
 
-            <h2>{snippets[asn].title}</h2>
-            <p className="snippet-detail__desc">{snippets[asn].description}</p>
+            <h2>{snippets[snippetIndex].title}</h2>
+            <p className="snippet-detail__desc">
+              {snippets[snippetIndex].description}
+            </p>
 
             <div className="snippet-detail__label-bar">
               <div className="snippet__labels">
-                {snippets[asn].favorite && (
+                {snippets[snippetIndex].favorite && (
                   <div className="card snippet__label snippet__label--fav">
                     Favorite
                   </div>
@@ -64,7 +65,20 @@ class SnippetDetail extends React.Component {
               </div>
 
               <div className="snippet-detail__label-bar__control">
-                <img src={require('../icons/fav.svg')} alt="" />
+                {snippets[snippetIndex].favorite && (
+                  <img
+                    onClick={() => this.props.setFavorite(snippetIndex)}
+                    src={require('../icons/fav.svg')}
+                    alt=""
+                  />
+                )}
+                {!snippets[snippetIndex].favorite && (
+                  <img
+                    onClick={() => this.props.setFavorite(snippetIndex)}
+                    src={require('../icons/fav-empty.svg')}
+                    alt=""
+                  />
+                )}
                 <select>
                   <option selected disabled value="label">
                     Labels
@@ -78,7 +92,7 @@ class SnippetDetail extends React.Component {
 
             <hr />
 
-            {snippets[asn].files.map((key, index) => (
+            {snippets[snippetIndex].files.map((key, index) => (
               <div className="editor-detail card" key={key}>
                 <div className="editor-detail__top">
                   <p className="editor-detail__top__lang">Javascript</p>
@@ -89,7 +103,7 @@ class SnippetDetail extends React.Component {
                   mode={this.state.mode}
                   theme={this.state.theme}
                   onValidate={this.onValidate}
-                  value={snippets[asn].files[index]}
+                  value={snippets[snippetIndex].files[index]}
                   fontSize={this.state.fontSize}
                   showPrintMargin={this.state.showPrintMargin}
                   showGutter={this.state.showGutter}
