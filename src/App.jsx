@@ -43,7 +43,6 @@ class App extends Component {
   };
 
   getAllLanguages = () => {
-    const languages = this.state.languages;
     let allLangs = [];
     let filteredLangs = [];
 
@@ -51,10 +50,8 @@ class App extends Component {
     for (let i = 0; i < this.state.initialSnippets.length; i++) {
       allLangs.push(...this.state.snippets[i].languages);
     }
-
     // rm duplicates from combined arr
     filteredLangs = removeDuplicates(allLangs);
-
     // update state
     this.setState({ languages: filteredLangs });
   };
@@ -97,7 +94,7 @@ class App extends Component {
 
   searchSnippets = event => {
     let updatedList = this.state.initialSnippets;
-    if (event.target.value.length == 0) {
+    if (event.target.value.length === 0) {
       this.setState({ initialSnippets: this.state.snippets });
       return;
     }

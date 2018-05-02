@@ -24,7 +24,6 @@ class SnippetDetail extends React.Component {
   render() {
     const snippets = this.props.snippets;
     const snippetIndex = this.props.activeSnippet;
-    const favIcon = this.state.favIcon;
 
     if (this.props.snippets.length > 0) {
       this.state.value = snippets[snippetIndex].files[0];

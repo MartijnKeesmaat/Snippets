@@ -54,7 +54,6 @@ class Editor extends React.Component {
   }
 
   onChange(newValue) {
-    const value = this.state.value;
     this.setState({
       value: newValue
     });
