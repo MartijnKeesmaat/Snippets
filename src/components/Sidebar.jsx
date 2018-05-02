@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-awesome-modal';
 import Editor from './Editor';
+import { getCurrentDate, getCurrentTime } from '../helpers';
 
 class Sidebar extends React.Component {
   state = {
@@ -11,31 +12,6 @@ class Sidebar extends React.Component {
   titleRef = React.createRef();
   descriptionRef = React.createRef();
   filesRef = React.createRef();
-
-  getCurrentDate = () => {
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
-    var yyyy = today.getFullYear();
-
-    if (dd < 10) {
-      dd = '0' + dd;
-    }
-
-    if (mm < 10) {
-      mm = '0' + mm;
-    }
-
-    return (today = dd + '/' + mm + '/' + yyyy);
-  };
-
-  getCurrentTime = () => {
-    const d = new Date();
-    const h = d.getHours();
-    const min = d.getMinutes();
-    const sec = d.getSeconds();
-    return h + ':' + min + ':' + sec;
-  };
 
   getSnippetCode = (snippetCode, key) => {
     this.state.snippetCode[key] = snippetCode;
@@ -55,10 +31,11 @@ class Sidebar extends React.Component {
       title: this.titleRef.current.value,
       description: this.descriptionRef.current.value,
       files: this.state.snippetCode,
-      dateCreated: this.getCurrentDate(),
-      timeCreated: this.getCurrentTime(),
+      dateCreated: getCurrentDate(),
+      timeCreated: getCurrentTime(),
       favorite: false,
-      labels: []
+      labels: [],
+      languages: []
     };
     this.props.addSnippet(snippet);
     e.currentTarget.reset();
