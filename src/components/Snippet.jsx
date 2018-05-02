@@ -11,9 +11,11 @@ class Snippets extends React.Component {
         <h4>{details.title}</h4>
         <p>{details.description}</p>
         <div className="snippet__labels">
-          <div className="card snippet__label snippet__label--fav">
-            Favorite
-          </div>
+          {details.favorite && (
+            <div className="card snippet__label snippet__label--fav">
+              Favorite
+            </div>
+          )}
           <div className="card snippet__label">Docs</div>
           <div className="card snippet__label">Very nice</div>
         </div>
