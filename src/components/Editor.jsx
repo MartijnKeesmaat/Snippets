@@ -10,21 +10,22 @@ const defaultValue = `//code here`;
 
 const languages = [
   'javascript',
-  'java',
+  'css',
+  'jsx',
+  'sass',
   'python',
+  'markdown',
+  'html',
   'xml',
   'ruby',
-  'sass',
-  'markdown',
   'mysql',
   'json',
-  'html',
   'handlebars',
   'golang',
+  'java',
   'csharp',
   'elixir',
-  'typescript',
-  'css'
+  'typescript'
 ];
 
 languages.forEach(lang => {
@@ -37,7 +38,7 @@ class Editor extends React.Component {
     super(props);
     this.state = {
       value: defaultValue,
-      mode: 'jsx',
+      mode: 'Javascript',
       theme: 'github',
       enableBasicAutocompletion: false,
       enableLiveAutocompletion: false,
@@ -64,6 +65,11 @@ class Editor extends React.Component {
     this.setState({
       mode: e.target.value
     });
+    this.props.getLang(e.target.value, this.props.index);
+  }
+
+  componentDidMount() {
+    this.props.getLang(this.state.mode, this.props.index);
   }
 
   render() {
