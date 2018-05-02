@@ -95,7 +95,9 @@ class SnippetDetail extends React.Component {
             {snippets[snippetIndex].files.map((key, index) => (
               <div className="editor-detail card" key={key}>
                 <div className="editor-detail__top">
-                  <p className="editor-detail__top__lang">Javascript</p>
+                  <p className="editor-detail__top__lang">
+                    {snippets[snippetIndex].languages[index]}
+                  </p>
                   <button className="editor-detail__copy">Copy code</button>
                 </div>
                 <AceEditor

@@ -6,7 +6,8 @@ import { getCurrentDate, getCurrentTime } from '../helpers';
 class Sidebar extends React.Component {
   state = {
     snippetCode: [''],
-    fileComponents: [1]
+    fileComponents: [1],
+    lang: []
   };
 
   titleRef = React.createRef();
@@ -20,8 +21,18 @@ class Sidebar extends React.Component {
   addFile = e => {
     const fileComponents = this.state.fileComponents;
     fileComponents.push(1);
+    this.getLang;
     this.setState({
       fileComponents
+    });
+  };
+
+  getLang = (language, key) => {
+    const lang = this.state.lang;
+    lang[key] = language;
+
+    this.setState({
+      lang
     });
   };
 
@@ -31,14 +42,16 @@ class Sidebar extends React.Component {
       title: this.titleRef.current.value,
       description: this.descriptionRef.current.value,
       files: this.state.snippetCode,
+      languages: this.state.lang,
       dateCreated: getCurrentDate(),
       timeCreated: getCurrentTime(),
       favorite: false,
-      labels: [],
-      languages: []
+      labels: []
     };
     this.props.addSnippet(snippet);
     e.currentTarget.reset();
+
+    console.log(snippet);
   };
 
   render() {
@@ -131,6 +144,7 @@ class Sidebar extends React.Component {
                   getFileCode={this.getFileCode}
                   addSnippet={this.addSnippet}
                   getSnippetCode={this.getSnippetCode}
+                  getLang={this.getLang}
                 />
               ))}
 
