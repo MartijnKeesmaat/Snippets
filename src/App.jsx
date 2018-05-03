@@ -124,23 +124,20 @@ class App extends Component {
   };
 
   filterLanguage = e => {
-    let active = false;
-    if (!active) {
-      const clickedLang = e.target.textContent;
-      let updatedList = this.state.initialSnippets;
-      updatedList = updatedList.filter(snippet => {
-        return (
-          snippet.languages[0] === clickedLang ||
-          snippet.languages[1] === clickedLang ||
-          snippet.languages[2] === clickedLang
-        );
-      });
-      this.setState({ initialSnippets: updatedList });
-    } else {
-      this.setState({ initialSnippets: this.state.snippets });
-    }
-    active = !active;
-    console.log(active);
+    const clickedLang = e.target.textContent;
+    let updatedList = this.state.snippets; //reset list when another is clicked
+    updatedList = updatedList.filter(snippet => {
+      return (
+        //TODO clean this
+        snippet.languages[0] === clickedLang ||
+        snippet.languages[1] === clickedLang ||
+        snippet.languages[2] === clickedLang ||
+        snippet.languages[3] === clickedLang ||
+        snippet.languages[4] === clickedLang ||
+        snippet.languages[5] === clickedLang
+      );
+    });
+    this.setState({ initialSnippets: updatedList });
   };
 
   showAllSnippets = () => {
