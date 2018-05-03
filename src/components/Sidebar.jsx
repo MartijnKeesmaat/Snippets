@@ -83,15 +83,17 @@ class Sidebar extends React.Component {
             </div>
 
             <div className="sidebar__links">
-              <h3>Labels</h3>
-              <a href="" className="sidebar__link">
-                <span className="sidebar__label__icon" />
-                All snippets
-              </a>
-              <a href="" className="sidebar__link">
-                <span className="sidebar__label__icon" />
-                Favorites
-              </a>
+              <div className="sidebar__links__label-header">
+                <h3>Labels</h3>
+                <button>+</button>
+              </div>
+              {this.props.initialSnippets.length > 0 &&
+                this.props.labels.map((label, key) => (
+                  <button href="" className="sidebar__link" key={key}>
+                    <span className="sidebar__label__icon" />
+                    {label}
+                  </button>
+                ))}
             </div>
 
             <div className="sidebar__links sidebar__links--lang">

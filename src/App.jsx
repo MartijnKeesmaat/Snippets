@@ -13,7 +13,8 @@ class App extends Component {
     filterSnippets: [],
     activeSnippet: 0,
     languages: [],
-    visible: false
+    visible: false,
+    labels: ['test']
   };
 
   // wait for snippets to load
@@ -128,8 +129,7 @@ class App extends Component {
     let updatedList = this.state.snippets; //reset list when another is clicked
     updatedList = updatedList.filter(snippet => {
       return (
-        //TODO clean this
-        snippet.languages[0] === clickedLang ||
+        //TODO clean this snippet.languages[0] === clickedLang ||
         snippet.languages[1] === clickedLang ||
         snippet.languages[2] === clickedLang ||
         snippet.languages[3] === clickedLang ||
@@ -157,6 +157,7 @@ class App extends Component {
           initialSnippets={this.state.initialSnippets}
           languages={this.state.languages}
           filterLanguage={this.filterLanguage}
+          labels={this.state.labels}
         />
         <div className="nav-content">
           <Header searchSnippets={this.searchSnippets} />
