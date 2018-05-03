@@ -5,6 +5,8 @@ import Sidebar from './components/Sidebar';
 import Snippets from './components/Snippets';
 import SnippetDetail from './components/SnippetDetail';
 import { removeDuplicates } from './helpers';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class App extends Component {
   state = {
@@ -152,6 +154,7 @@ class App extends Component {
     updatedList = updatedList.filter(snippet => {
       return (
         //TODO clean this snippet.languages[0] === clickedLang ||
+        snippet.languages[0] === clickedLang ||
         snippet.languages[1] === clickedLang ||
         snippet.languages[2] === clickedLang ||
         snippet.languages[3] === clickedLang ||
