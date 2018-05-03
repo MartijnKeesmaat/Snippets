@@ -438,6 +438,8 @@ header {
         margin-bottom: 7px;
         cursor: pointer;
         transition: all .5s ease-in-out; }
+        .sidebar__links__label-header button:focus {
+          outline: none; }
         .sidebar__links__label-header button:hover {
           animation: rainbow 3s infinite;
           transform: scale(1.4); }
@@ -473,6 +475,19 @@ header {
     border-radius: 50%;
     background: pink;
     display: inline-block; }
+
+.addLabel {
+  display: flex;
+  position: relative;
+  margin-top: -10px;
+  margin-bottom: 20px; }
+  .addLabel .btn, .addLabel input[type=submit] {
+    margin: 0;
+    padding: .3em .6em;
+    font-weight: 600;
+    font-size: 2rem; }
+  .addLabel input {
+    margin: 0; }
 
 @keyframes rainbow {
   0% {

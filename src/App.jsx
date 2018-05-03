@@ -43,6 +43,14 @@ class App extends Component {
     });
   };
 
+  addLabel = labelName => {
+    let labels = this.state.labels;
+    labels.push(labelName);
+    this.setState({
+      labels
+    });
+  };
+
   getAllLanguages = () => {
     let allLangs = [];
     let filteredLangs = [];
@@ -61,6 +69,11 @@ class App extends Component {
     this.ref = base.syncState('snippets', {
       context: this,
       state: 'snippets'
+    });
+    base.syncState(`labels`, {
+      context: this,
+      state: 'labels',
+      asArray: true
     });
     this.waitForSnippets();
   }
@@ -158,6 +171,7 @@ class App extends Component {
           languages={this.state.languages}
           filterLanguage={this.filterLanguage}
           labels={this.state.labels}
+          addLabel={this.addLabel}
         />
         <div className="nav-content">
           <Header searchSnippets={this.searchSnippets} />

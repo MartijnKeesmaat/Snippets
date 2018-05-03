@@ -41,6 +41,9 @@
         cursor: pointer
         transition: all .5s ease-in-out;
 
+        &:focus
+          outline: none
+
         &:hover
           animation: rainbow 3s infinite
           transform: scale(1.4);
@@ -86,6 +89,20 @@
       background: pink
       display: inline-block
 
+.addLabel
+  display: flex
+  position: relative
+  margin-top: -10px
+  margin-bottom: 20px
+
+  .btn
+    margin: 0
+    padding: .3em .6em
+    font-weight: 600
+    font-size: 2rem
+
+  input
+    margin: 0  
 
 
 @keyframes rainbow 

@@ -7,10 +7,12 @@ class Sidebar extends React.Component {
   state = {
     snippetCode: [''],
     fileComponents: [1],
-    lang: []
+    lang: [],
+    addLabel: false
   };
 
   titleRef = React.createRef();
+  addLabelRef = React.createRef();
   descriptionRef = React.createRef();
   filesRef = React.createRef();
 
@@ -54,6 +56,20 @@ class Sidebar extends React.Component {
     console.log(snippet);
   };
 
+  createLabel = e => {
+    e.preventDefault();
+    const labelName = this.addLabelRef.current.value;
+    console.log(labelName);
+    this.props.addLabel(labelName);
+    e.currentTarget.reset();
+  };
+
+  toggleLabelAdd = () => {
+    this.setState({
+      addLabel: !this.state.addLabel
+    });
+  };
+
   render() {
     return (
       <div>
@@ -85,8 +101,20 @@ class Sidebar extends React.Component {
             <div className="sidebar__links">
               <div className="sidebar__links__label-header">
                 <h3>Labels</h3>
-                <button>+</button>
+                <button onClick={() => this.toggleLabelAdd()}>+</button>
               </div>
+              {this.state.addLabel && (
+                <form className="addLabel" onSubmit={this.createLabel}>
+                  <input
+                    type="text"
+                    placeholder="Name your label"
+                    ref={this.addLabelRef}
+                  />
+                  <button type="submit" className="btn">
+                    +
+                  </button>
+                </form>
+              )}
               {this.props.initialSnippets.length > 0 &&
                 this.props.labels.map((label, key) => (
                   <button href="" className="sidebar__link" key={key}>
