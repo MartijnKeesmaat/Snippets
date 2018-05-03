@@ -196,6 +196,7 @@ class App extends Component {
             />
             <SnippetDetail
               snippets={this.state.snippets}
+              initialSnippets={this.state.initialSnippets}
               activeSnippet={this.state.activeSnippet}
               getFav={this.getFav}
               setFavorite={this.setFavorite}
