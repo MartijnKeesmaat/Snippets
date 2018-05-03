@@ -3,6 +3,7 @@ import AceEditor from 'react-ace';
 import 'brace/ext/language_tools';
 import 'brace/ext/searchbox';
 import 'brace/theme/tomorrow';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const defaultValue = '';
 
@@ -18,12 +19,42 @@ class SnippetDetail extends React.Component {
     showPrintMargin: true,
     highlightActiveLine: true,
     enableSnippets: false,
-    showLineNumbers: true
+    showLineNumbers: true,
+    copied: false
+  };
+
+  addLabel = e => {
+    const labelArr = this.props.snippets[this.props.activeSnippet].labels;
+    const selectedOption = e.target.options[
+      e.target.options.selectedIndex
+    ].text.toLowerCase();
+
+    labelArr.push(selectedOption);
+
+    this.setState({});
+  };
+
+  copyCode = () => {
+    this.setState({ copied: true });
+    var here = this;
+    var delay = (function() {
+      var timer = 0;
+      return function(callback, ms) {
+        clearTimeout(timer);
+        timer = setTimeout(callback, ms);
+      };
+    })();
+
+    delay(function() {
+      here.setState({ copied: false });
+    }, 3000);
   };
 
   render() {
     const snippets = this.props.snippets;
     const snippetIndex = this.props.activeSnippet;
+    // const labelArr = this.props.snippets[this.props.activeSnippet].labels;
+    const labelArr = [];
 
     if (this.props.snippets.length > 0) {
       this.state.value = snippets[snippetIndex].files[0];
@@ -57,6 +88,12 @@ class SnippetDetail extends React.Component {
                     Favorite
                   </div>
                 )}
+
+                {labelArr.map((label, key) => (
+                  <option value={label} key={key}>
+                    {label}
+                  </option>
+                ))}
                 <div className="card snippet__label">Docs</div>
                 <div className="card snippet__label">Very nice</div>
               </div>
@@ -76,13 +113,16 @@ class SnippetDetail extends React.Component {
                     alt=""
                   />
                 )}
-                <select>
+                <select onChange={this.addLabel}>
                   <option selected disabled value="label">
                     Labels
                   </option>
-                  <option value="docs">Docs</option>
-                  <option value="docs">React</option>
-                  <option value="docs">Very nice</option>
+
+                  {this.props.labels.map((label, key) => (
+                    <option value={label} key={key}>
+                      {label}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
@@ -95,7 +135,19 @@ class SnippetDetail extends React.Component {
                   <p className="editor-detail__top__lang">
                     {snippets[snippetIndex].languages[index]}
                   </p>
-                  <button className="editor-detail__copy">Copy code</button>
+
+                  <CopyToClipboard
+                    text={snippets[snippetIndex].files[index]}
+                    onCopy={() => this.copyCode()}
+                  >
+                    <button className="editor-detail__copy">
+                      {this.state.copied ? (
+                        <span className={'copied'}>Copied</span>
+                      ) : (
+                        <span>Copy code</span>
+                      )}
+                    </button>
+                  </CopyToClipboard>
                 </div>
                 <AceEditor
                   key={key}

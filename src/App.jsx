@@ -180,12 +180,14 @@ class App extends Component {
               snippets={this.state.snippets}
               initialSnippets={this.state.initialSnippets}
               showSnippetDetail={this.showSnippetDetail}
+              labels={this.state.labels}
             />
             <SnippetDetail
               snippets={this.state.snippets}
               activeSnippet={this.state.activeSnippet}
               getFav={this.getFav}
               setFavorite={this.setFavorite}
+              labels={this.state.labels}
             />
           </main>
         </div>

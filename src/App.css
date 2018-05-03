@@ -401,7 +401,10 @@ header {
     background: none;
     border: none;
     font-family: inherit;
-    cursor: pointer; }
+    cursor: pointer;
+    outline: none; }
+    .editor-detail__copy:focus {
+      outline: none; }
 
 .sidebar {
   width: 250px;
@@ -491,19 +494,15 @@ header {
 
 @keyframes rainbow {
   0% {
-    color: #7ccdea; }
-  16% {
-    color: #0074d9; }
-  32% {
-    color: #2ecc40; }
-  48% {
-    color: #ffdc00; }
-  64% {
-    color: #b10dc9; }
-  80% {
-    color: #ff4136; }
+    color: #949eff; }
+  25% {
+    color: #746fec; }
+  50% {
+    color: #c6a1f7; }
+  75% {
+    color: #fd79a8; }
   100% {
-    color: #7ccdea; } }
+    color: #949eff; } }
 
 .snippet-detail {
   padding: 20px 20px 20px 10px;
@@ -549,3 +548,10 @@ header {
   .snippet-detail hr {
     margin-bottom: 30px;
     opacity: .5; }
+
+.copied {
+  transition: all .5s ease-in-out;
+  animation: rainbow 3s infinite;
+  outline: none; }
+  .copied:focus {
+    outline: none; }
