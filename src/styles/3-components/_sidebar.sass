@@ -4,7 +4,10 @@
   height: 100vh
   display: flex
   justify-content: center
-  padding-top: 30px
+  overflow: hidden
+
+  .scroll-container
+    padding-top: 30px
 
   h3
     font-weight: 600
@@ -19,6 +22,7 @@
 
   .btn
     margin-bottom: 40px
+    min-height: 45px;
 
   &__links
     margin: 0 0 35px 0
@@ -40,6 +44,7 @@
         margin-bottom: 7px
         cursor: pointer
         transition: all .5s ease-in-out;
+        line-height: 0
 
         &:focus
           outline: none
@@ -67,6 +72,9 @@
     font-family: inherit
     padding: 0
     cursor: pointer
+
+    &:last-child
+      margin-bottom: 0
 
     &:focus
       outline: none

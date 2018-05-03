@@ -90,70 +90,72 @@ class Sidebar extends React.Component {
     return (
       <div>
         <aside className="sidebar card">
-          <div className="sidebar__inner">
-            <h3>Snippets</h3>
-            <button className="btn" onClick={this.props.openModal}>
-              Add snippet
-            </button>
-
-            <div className="sidebar__links">
-              <button
-                href=""
-                onClick={this.props.showAllSnippets}
-                className="sidebar__link"
-              >
-                <img src={require('../icons/code.svg')} alt="" />
-                All snippets
+          <div className="scroll-container">
+            <div className="sidebar__inner">
+              <h3>Snippets</h3>
+              <button className="btn" onClick={this.props.openModal}>
+                Add snippet
               </button>
-              <button
-                onClick={this.props.showFavorites}
-                className="sidebar__link"
-              >
-                <img src={require('../icons/fav.svg')} alt="" />
-                Favorites
-              </button>
-            </div>
 
-            <div className="sidebar__links">
-              <div className="sidebar__links__label-header">
-                <h3>Labels</h3>
-                <button onClick={() => this.toggleLabelAdd()}>+</button>
+              <div className="sidebar__links">
+                <button
+                  href=""
+                  onClick={this.props.showAllSnippets}
+                  className="sidebar__link"
+                >
+                  <img src={require('../icons/code.svg')} alt="" />
+                  All snippets
+                </button>
+                <button
+                  onClick={this.props.showFavorites}
+                  className="sidebar__link"
+                >
+                  <img src={require('../icons/fav.svg')} alt="" />
+                  Favorites
+                </button>
               </div>
-              {this.state.addLabel && (
-                <form className="addLabel" onSubmit={this.createLabel}>
-                  <input
-                    type="text"
-                    placeholder="Name your label"
-                    ref={this.addLabelRef}
-                    id="addLabel"
-                  />
-                  <button type="submit" className="btn">
-                    +
-                  </button>
-                </form>
-              )}
-              {this.props.initialSnippets.length > 0 &&
-                this.props.labels.map((label, key) => (
-                  <button href="" className="sidebar__link" key={key}>
-                    <span className="sidebar__label__icon" />
-                    {label}
-                  </button>
-                ))}
-            </div>
 
-            <div className="sidebar__links sidebar__links--lang">
-              <h3>Languages</h3>
-              {this.props.initialSnippets.length > 0 &&
-                this.props.languages.map((lang, key) => (
-                  <button
-                    className="sidebar__link"
-                    onClick={e => this.props.filterLanguage(e)}
-                    key={key}
-                  >
-                    <img src={require('../icons/hash.svg')} alt="" />
-                    {lang}
-                  </button>
-                ))}
+              <div className="sidebar__links">
+                <div className="sidebar__links__label-header">
+                  <h3>Labels</h3>
+                  <button onClick={() => this.toggleLabelAdd()}>+</button>
+                </div>
+                {this.state.addLabel && (
+                  <form className="addLabel" onSubmit={this.createLabel}>
+                    <input
+                      type="text"
+                      placeholder="Name your label"
+                      ref={this.addLabelRef}
+                      id="addLabel"
+                    />
+                    <button type="submit" className="btn">
+                      +
+                    </button>
+                  </form>
+                )}
+                {this.props.initialSnippets.length > 0 &&
+                  this.props.labels.map((label, key) => (
+                    <button href="" className="sidebar__link" key={key}>
+                      <span className="sidebar__label__icon" />
+                      {label}
+                    </button>
+                  ))}
+              </div>
+
+              <div className="sidebar__links sidebar__links--lang">
+                <h3>Languages</h3>
+                {this.props.initialSnippets.length > 0 &&
+                  this.props.languages.map((lang, key) => (
+                    <button
+                      className="sidebar__link"
+                      onClick={e => this.props.filterLanguage(e)}
+                      key={key}
+                    >
+                      <img src={require('../icons/hash.svg')} alt="" />
+                      {lang}
+                    </button>
+                  ))}
+              </div>
             </div>
           </div>
         </aside>
