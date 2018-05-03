@@ -59,8 +59,8 @@ class Sidebar extends React.Component {
   createLabel = e => {
     e.preventDefault();
     const labelName = this.addLabelRef.current.value;
-    console.log(labelName);
     this.props.addLabel(labelName);
+    this.toggleLabelAdd();
     e.currentTarget.reset();
   };
 
@@ -68,6 +68,22 @@ class Sidebar extends React.Component {
     this.setState({
       addLabel: !this.state.addLabel
     });
+
+    if (!this.state.addLabel) {
+      // wait for setState
+      var here = this;
+      var delay = (function() {
+        var timer = 0;
+        return function(callback, ms) {
+          clearTimeout(timer);
+          timer = setTimeout(callback, ms);
+        };
+      })();
+
+      delay(function() {
+        here.addLabelRef.current.focus();
+      }, 1);
+    }
   };
 
   render() {
@@ -109,6 +125,7 @@ class Sidebar extends React.Component {
                     type="text"
                     placeholder="Name your label"
                     ref={this.addLabelRef}
+                    id="addLabel"
                   />
                   <button type="submit" className="btn">
                     +
