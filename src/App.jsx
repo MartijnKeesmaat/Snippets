@@ -149,6 +149,9 @@ class App extends Component {
   };
 
   filterLanguage = e => {
+    this.setState({
+      activeSnippet: 0
+    });
     const clickedLang = e.target.textContent;
     let updatedList = this.state.snippets; //reset list when another is clicked
     updatedList = updatedList.filter(snippet => {
