@@ -72,7 +72,11 @@ class SnippetDetail extends React.Component {
 
               <div className="snippet-detail__controls">
                 <img src={require('../icons/edit.svg')} alt="" />
-                <img src={require('../icons/trash.svg')} alt="" />
+                <img
+                  onClick={() => this.props.deleteSnippet(snippetIndex)}
+                  src={require('../icons/trash.svg')}
+                  alt=""
+                />
               </div>
             </div>
 

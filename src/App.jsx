@@ -106,6 +106,15 @@ class App extends Component {
     });
   };
 
+  deleteSnippet = key => {
+    const initialSnippets = this.state.initialSnippets;
+    initialSnippets.splice(key, 1);
+    this.setState({
+      initialSnippets,
+      snippets: initialSnippets
+    });
+  };
+
   searchSnippets = event => {
     let updatedList = this.state.initialSnippets;
     if (event.target.value.length === 0) {
@@ -188,6 +197,7 @@ class App extends Component {
               getFav={this.getFav}
               setFavorite={this.setFavorite}
               labels={this.state.labels}
+              deleteSnippet={this.deleteSnippet}
             />
           </main>
         </div>
