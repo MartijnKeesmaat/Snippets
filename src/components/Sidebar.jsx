@@ -162,52 +162,56 @@ class Sidebar extends React.Component {
 
         <Modal
           visible={this.props.visible}
-          width="900"
+          width="800"
           effect="fadeInUp"
           onClickAway={this.props.closeModal}
         >
           <div className="modal">
-            <h3>Add new snippet</h3>
+            <div className="modal__inner">
+              <h3>Add new snippet</h3>
 
-            <form onSubmit={this.createSnippet} className="add-snippet-form">
-              <label>Title</label>
-              <input
-                name="title"
-                ref={this.titleRef}
-                type="text"
-                placeholder="Title"
-                required
-              />
-              <label>Description</label>
-              <textarea
-                name="description"
-                ref={this.descriptionRef}
-                placeholder="Description"
-                id=""
-                cols="20"
-                rows="5"
-              />
-
-              {this.state.fileComponents.map((code, key) => (
-                <Editor
+              <form onSubmit={this.createSnippet} className="add-snippet-form">
+                <label>Title</label>
+                <input
+                  name="title"
+                  ref={this.titleRef}
+                  type="text"
+                  placeholder="Title"
                   required
-                  key={key}
-                  index={key}
-                  getFileCode={this.getFileCode}
-                  addSnippet={this.addSnippet}
-                  getSnippetCode={this.getSnippetCode}
-                  getLang={this.getLang}
                 />
-              ))}
+                <label>Description</label>
+                <textarea
+                  name="description"
+                  ref={this.descriptionRef}
+                  placeholder="Description"
+                  id=""
+                  cols="20"
+                  rows="5"
+                />
 
-              <a onClick={this.addFile}>Add file</a>
-              <button type="submit" className="btn">
-                Add snippet
-              </button>
-            </form>
-            <a className="modal-close" onClick={this.props.closeModal}>
-              &times;
-            </a>
+                {this.state.fileComponents.map((code, key) => (
+                  <Editor
+                    required
+                    key={key}
+                    index={key}
+                    getFileCode={this.getFileCode}
+                    addSnippet={this.addSnippet}
+                    getSnippetCode={this.getSnippetCode}
+                    getLang={this.getLang}
+                  />
+                ))}
+
+                <a className="add-file" onClick={this.addFile}>
+                  + Add file
+                </a>
+                <button type="submit" className="btn">
+                  Add snippet
+                </button>
+              </form>
+              <a className="modal-close" onClick={this.props.closeModal}>
+                &times;
+              </a>
+            </div>
           </div>
         </Modal>
       </div>

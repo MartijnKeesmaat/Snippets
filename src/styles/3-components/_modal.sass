@@ -1,15 +1,64 @@
-.add-snippet-form
-  padding: 20px
-  display: flex
-  flex-direction: column
-  justify-content: center
-  align-items: center
-
-.modal-close
-  position: absolute
-  top: 10px
-  right: 10px
-
-.modal 
+.modal
+  background: #FCFCFC 
   height: 80vh
   overflow: scroll
+
+  h3
+    font-weight: 700
+    text-transform: uppercase
+    letter-spacing: .8px
+    margin-bottom: 35px
+    font-size: 1.7rem
+
+  label
+    font-weight: 700
+    letter-spacing: .3px
+    font-family: inherit
+    margin-bottom: 0
+    color: #2a324e
+  
+  input
+    margin-bottom: 20px
+
+  &__inner
+    max-width: 570px
+    margin: 0 auto
+    padding: 30px
+  
+  textarea
+    max-width: 100%
+    margin-bottom: 20px
+
+  button
+    max-width: 180px
+
+.add-snippet-form
+  display: flex
+  flex-direction: column
+
+.modal-close
+  position: absolute;
+  top: 10px;
+  right: 30px;
+  font-size: 2.6rem;
+  font-weight: 700;
+  transition: all .5s ease-in-out
+  cursor: pointer
+
+  &:hover
+    animation: rainbow 3s infinite
+    transform: scale(1.2)
+
+.add-file
+  text-align: left
+  font-weight: 700
+  text-transform: uppercase
+  letter-spacing: .7px
+  font-size: 1.5rem
+  margin-bottom: 20px
+  transition: all .3s ease-in-out
+  cursor: pointer
+
+  &:hover
+    animation: rainbow 3s infinite
+    letter-spacing: 2px

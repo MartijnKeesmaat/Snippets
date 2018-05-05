@@ -16,7 +16,7 @@ class App extends Component {
     activeSnippet: 0,
     languages: [],
     visible: false,
-    labels: ['test']
+    labels: []
   };
 
   // wait for snippets to load

@@ -363,21 +363,62 @@ header {
     box-shadow: 2px 2px 12px 1px rgba(39, 62, 84, 0.08);
     cursor: pointer; }
 
+.modal {
+  background: #FCFCFC;
+  height: 80vh;
+  overflow: scroll; }
+  .modal h3 {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    margin-bottom: 35px;
+    font-size: 1.7rem; }
+  .modal label {
+    font-weight: 700;
+    letter-spacing: .3px;
+    font-family: inherit;
+    margin-bottom: 0;
+    color: #2a324e; }
+  .modal input {
+    margin-bottom: 20px; }
+  .modal__inner {
+    max-width: 570px;
+    margin: 0 auto;
+    padding: 30px; }
+  .modal textarea {
+    max-width: 100%;
+    margin-bottom: 20px; }
+  .modal button {
+    max-width: 180px; }
+
 .add-snippet-form {
-  padding: 20px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; }
+  flex-direction: column; }
 
 .modal-close {
   position: absolute;
   top: 10px;
-  right: 10px; }
+  right: 30px;
+  font-size: 2.6rem;
+  font-weight: 700;
+  transition: all .5s ease-in-out;
+  cursor: pointer; }
+  .modal-close:hover {
+    animation: rainbow 3s infinite;
+    transform: scale(1.2); }
 
-.modal {
-  height: 80vh;
-  overflow: scroll; }
+.add-file {
+  text-align: left;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .7px;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  transition: all .3s ease-in-out;
+  cursor: pointer; }
+  .add-file:hover {
+    animation: rainbow 3s infinite;
+    letter-spacing: 2px; }
 
 .editor-detail {
   margin-bottom: 30px; }

@@ -74,39 +74,48 @@ class Editor extends React.Component {
   render() {
     return (
       <div>
-        <label>Language:</label>
-        <p className="control">
-          <span className="select">
-            <select name="mode" onChange={this.setMode} value={this.state.mode}>
-              {languages.map(lang => (
-                <option key={lang} value={lang}>
-                  {lang}
-                </option>
-              ))}
-            </select>
-          </span>
-        </p>
+        <div className="editor-detail card">
+          <div className="editor-detail__top">
+            <label>Language:</label>
+            <p className="control">
+              <span className="select">
+                <select
+                  name="mode"
+                  onChange={this.setMode}
+                  value={this.state.mode}
+                >
+                  {languages.map(lang => (
+                    <option key={lang} value={lang}>
+                      {lang}
+                    </option>
+                  ))}
+                </select>
+              </span>
+            </p>
+          </div>
 
-        <AceEditor
-          mode={this.state.mode}
-          theme={this.state.theme}
-          onValidate={this.onValidate}
-          value={this.state.value}
-          height={'250px'}
-          fontSize={this.state.fontSize}
-          showPrintMargin={this.state.showPrintMargin}
-          showGutter={this.state.showGutter}
-          highlightActiveLine={this.state.highlightActiveLine}
-          editorProps={{ $blockScrolling: Infinity }}
-          onChange={this.onChange}
-          setOptions={{
-            enableBasicAutocompletion: this.state.enableBasicAutocompletion,
-            enableLiveAutocompletion: this.state.enableLiveAutocompletion,
-            enableSnippets: this.state.enableSnippets,
-            showLineNumbers: this.state.showLineNumbers,
-            tabSize: 2
-          }}
-        />
+          <AceEditor
+            mode={this.state.mode}
+            theme={this.state.theme}
+            onValidate={this.onValidate}
+            value={this.state.value}
+            height={'200px'}
+            width={'100%'}
+            fontSize={this.state.fontSize}
+            showPrintMargin={this.state.showPrintMargin}
+            showGutter={this.state.showGutter}
+            highlightActiveLine={this.state.highlightActiveLine}
+            editorProps={{ $blockScrolling: Infinity }}
+            onChange={this.onChange}
+            setOptions={{
+              enableBasicAutocompletion: this.state.enableBasicAutocompletion,
+              enableLiveAutocompletion: this.state.enableLiveAutocompletion,
+              enableSnippets: this.state.enableSnippets,
+              showLineNumbers: this.state.showLineNumbers,
+              tabSize: 2
+            }}
+          />
+        </div>
       </div>
     );
   }
