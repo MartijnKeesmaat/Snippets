@@ -53,7 +53,6 @@ class SnippetDetail extends React.Component {
   render() {
     const snippets = this.props.initialSnippets;
     const snippetIndex = this.props.activeSnippet;
-    console.log(snippets);
     // const labelArr = this.props.snippets[this.props.activeSnippet].labels;
     const labelArr = [];
 

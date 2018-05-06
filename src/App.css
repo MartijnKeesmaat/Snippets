@@ -422,6 +422,8 @@ header {
 
 .editor-detail {
   margin-bottom: 30px; }
+  .editor-detail:first-of-type .editor-detail__top__del {
+    display: none; }
   .editor-detail__top {
     display: flex;
     justify-content: space-between;
@@ -433,6 +435,19 @@ header {
       margin: 0;
       font-weight: 600;
       font-size: 1.5rem; }
+    .editor-detail__top__del {
+      font-size: 2rem;
+      opacity: .8;
+      font-weight: 700;
+      transition: all .5s ease-in-out;
+      cursor: pointer;
+      background: none;
+      border: none; }
+    .editor-detail__top__lang {
+      display: flex;
+      align-items: center; }
+      .editor-detail__top__lang label {
+        margin-right: 10px; }
   .editor-detail__copy {
     text-transform: uppercase;
     font-size: 1.4rem !important;
