@@ -1,4 +1,6 @@
 import React from 'react';
+import firebase from 'firebase';
+import base, { firebaseApp } from '../initFirebase';
 
 class Header extends React.Component {
   onChange = event => {
@@ -15,11 +17,16 @@ class Header extends React.Component {
           onChange={this.onChange}
         />
 
-        <div className="account">
-          <a href="">Log in</a>
-          <a href="">Log out</a>
-          <a href="">Sign up</a>
-        </div>
+        {this.props.isLoggedIn == false ? (
+          <div className="account">
+            <a href="">E-mail</a>
+            <a onClick={() => this.props.authenticate('Github')}>
+              Log in with Github
+            </a>
+          </div>
+        ) : (
+          <a onClick={this.props.signOut}>Sign out</a>
+        )}
       </header>
     );
   }

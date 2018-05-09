@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import firebase from 'firebase';
 import base from '../src/initFirebase';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
@@ -10,18 +11,21 @@ import 'react-toastify/dist/ReactToastify.css';
 
 class App extends Component {
   state = {
+    allSnippets: [],
     snippets: [],
     initialSnippets: [],
     filterSnippets: [],
     activeSnippet: 0,
     languages: [],
     visible: false,
-    labels: []
+    labels: [],
+    authenticated: false,
+    isLoggedIn: false
   };
 
   // wait for snippets to load
   waitForSnippets = input => {
-    base.listenTo('snippets', {
+    base.listenTo(`users/snippets`, {
       context: this,
       asArray: true,
       // still waiting..
@@ -67,17 +71,55 @@ class App extends Component {
     this.setState({ languages: filteredLangs });
   };
 
+  syncFirebase = () => {
+    const here = this;
+    if (firebase.auth().currentUser) {
+      const userId = firebase.auth().currentUser.uid;
+      here.setState({
+        isLoggedIn: true
+      });
+      this.ref = base.syncState(`users/${userId}/snippets`, {
+        context: this,
+        state: 'snippets'
+      });
+      base.syncState('users/labels', {
+        context: this,
+        state: 'labels',
+        asArray: true
+      });
+    }
+  };
+
+  authChange = () => {
+    const here = this;
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        here.syncFirebase();
+        if (user.providerData[0].displayName) {
+          const name = user.providerData[0].displayName;
+          toast('Hi ' + name, { autoClose: 3000 });
+        }
+      } else {
+        //
+      }
+    });
+  };
+
   componentDidMount() {
-    this.ref = base.syncState('snippets', {
-      context: this,
-      state: 'snippets'
-    });
-    base.syncState(`labels`, {
-      context: this,
-      state: 'labels',
-      asArray: true
-    });
+    var here = this;
+    var delay = (function() {
+      var timer = 0;
+      return function(callback, ms) {
+        clearTimeout(timer);
+        timer = setTimeout(callback, ms);
+      };
+    })();
+
+    delay(function() {
+      here.syncFirebase();
+    }, 2000);
     this.waitForSnippets();
+    this.authChange();
   }
 
   openModal = () => {
@@ -96,10 +138,23 @@ class App extends Component {
     const snippets = [...this.state.snippets];
     snippets.unshift(snippet);
     this.setState({
-      snippets
+      snippets,
+      initialSnippets: snippets
     });
 
+    this.syncFirebase();
     this.closeModal();
+    toast(snippet.title + ' is added', { autoClose: 3000 });
+  };
+
+  deleteSnippet = key => {
+    const initialSnippets = this.state.initialSnippets;
+    toast(this.state.snippets[key].title + ' is removed', { autoClose: 3000 });
+    initialSnippets.splice(key, 1);
+    this.setState({
+      initialSnippets,
+      snippets: initialSnippets
+    });
   };
 
   showSnippetDetail = key => {
@@ -108,13 +163,35 @@ class App extends Component {
     });
   };
 
-  deleteSnippet = key => {
-    const initialSnippets = this.state.initialSnippets;
-    initialSnippets.splice(key, 1);
-    this.setState({
-      initialSnippets,
-      snippets: initialSnippets
-    });
+  authHandler = async authData => {
+    var here = this;
+    var delay = (function() {
+      var timer = 0;
+      return function(callback, ms) {
+        clearTimeout(timer);
+        timer = setTimeout(callback, ms);
+      };
+    })();
+
+    delay(function() {
+      here.setState({
+        initialSnippets: here.state.snippets
+      });
+    }, 2000);
+  };
+
+  authenticate = provider => {
+    const authProvider = new firebase.auth[`${provider}AuthProvider`]();
+    firebase
+      .auth()
+      .signInWithPopup(authProvider)
+      .then(this.authHandler);
+  };
+
+  signOut = () => {
+    firebase.auth().signOut();
+    toast('Logged out :(', { autoClose: 3000 });
+    window.location.reload();
   };
 
   searchSnippets = event => {
@@ -175,6 +252,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <ToastContainer />
         <Sidebar
           addSnippet={this.addSnippet}
           openModal={this.openModal}
@@ -189,7 +267,13 @@ class App extends Component {
           addLabel={this.addLabel}
         />
         <div className="nav-content">
-          <Header searchSnippets={this.searchSnippets} />
+          <Header
+            searchSnippets={this.searchSnippets}
+            authenticated={this.state.authenticated}
+            authenticate={this.authenticate}
+            signOut={this.signOut}
+            isLoggedIn={this.state.isLoggedIn}
+          />
           <main className="main-content">
             <Snippets
               snippets={this.state.snippets}

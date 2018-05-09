@@ -20,10 +20,6 @@ class Sidebar extends React.Component {
     this.state.snippetCode[key] = snippetCode;
   };
 
-  componentDidUpdate() {
-    console.log(this.state.fileComponents);
-  }
-
   addFile = e => {
     const fileComponents = this.state.fileComponents;
     fileComponents.push('comp');
@@ -39,8 +35,6 @@ class Sidebar extends React.Component {
     this.setState({
       fileComponents
     });
-    console.log('from func');
-    console.log(this.state.fileComponents);
   };
 
   getLang = (language, key) => {
