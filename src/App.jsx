@@ -140,16 +140,16 @@ class App extends Component {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         here.syncFirebase();
-        const name = user.providerData[0].displayName;
-        toast('Hi ' + name, { autoClose: 3000 });
       } else {
-        alert('log in!');
+        // alert('log in!');
       }
     });
   };
 
   authHandler = async authData => {
     var here = this;
+    const name = firebase.auth().currentUser.displayName;
+    toast('Hi ' + name, { autoClose: 3000 });
     var delay = (function() {
       var timer = 0;
       return function(callback, ms) {
