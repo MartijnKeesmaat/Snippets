@@ -143,7 +143,12 @@ class Sidebar extends React.Component {
                 )}
                 {this.props.initialSnippets.length > 0 &&
                   this.props.labels.map((label, key) => (
-                    <button href="" className="sidebar__link" key={key}>
+                    <button
+                      onClick={this.props.filterLabel}
+                      href=""
+                      className="sidebar__link"
+                      key={key}
+                    >
                       <span className="sidebar__label__icon" />
                       {label}
                     </button>

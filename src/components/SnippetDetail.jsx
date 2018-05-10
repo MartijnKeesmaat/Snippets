@@ -71,7 +71,11 @@ class SnippetDetail extends React.Component {
               </div>
 
               <div className="snippet-detail__controls">
-                <img src={require('../icons/edit.svg')} alt="" />
+                <img
+                  onClick={this.props.editSnippet}
+                  src={require('../icons/edit.svg')}
+                  alt=""
+                />
                 <img
                   onClick={() => this.props.deleteSnippet(snippetIndex)}
                   src={require('../icons/trash.svg')}
@@ -117,7 +121,10 @@ class SnippetDetail extends React.Component {
                     alt=""
                   />
                 )}
-                <select onChange={this.addLabel}>
+                <select
+                  onClick={this.props.editSnippet}
+                  onChange={this.addLabel}
+                >
                   <option selected disabled value="label">
                     Labels
                   </option>
