@@ -192,6 +192,7 @@ class App extends Component {
 
     this.syncFirebase();
     this.closeModal();
+    this.getAllLanguages();
     toast(snippet.title + ' is added', { autoClose: 3000 });
   };
 
