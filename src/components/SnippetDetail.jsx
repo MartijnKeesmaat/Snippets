@@ -141,7 +141,7 @@ class SnippetDetail extends React.Component {
             <hr />
 
             {snippets[snippetIndex].files.map((key, index) => (
-              <div className="editor-detail card" key={key}>
+              <div className="editor-detail card" key={index}>
                 <div className="editor-detail__top">
                   <p className="editor-detail__top__lang">
                     {snippets[snippetIndex].languages[index]}
@@ -161,7 +161,6 @@ class SnippetDetail extends React.Component {
                   </CopyToClipboard>
                 </div>
                 <AceEditor
-                  key={key}
                   mode={this.state.mode}
                   theme={this.state.theme}
                   editorProps={{ $blockScrolling: Infinity }}

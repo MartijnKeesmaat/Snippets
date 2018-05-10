@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="15" height="11" viewBox="0 0 15 11">
+  <defs>
+    <linearGradient id="code-a" x1="50%" x2="50%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#949EFF"/>
+      <stop offset="100%" stop-color="#746FEC"/>
+    </linearGradient>
+  </defs>
+  <g fill="url(#code-a)">
+    <polygon points="5 9.091 1.852 6.001 5 2.909 4.074 2 0 6.001 4.074 10"/>
+    <polygon points="10 2.909 13.147 6.001 10 9.091 10.926 10 15 6.001 10.926 2"/>
+    <rect width="11" height="1" x="2" y="5" transform="rotate(-75.56 7.5 5.5)"/>
+  </g>
+</svg>
