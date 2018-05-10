@@ -1,6 +1,4 @@
 import React from 'react';
-import firebase from 'firebase';
-import base, { firebaseApp } from '../initFirebase';
 
 class Header extends React.Component {
   onChange = event => {
@@ -17,7 +15,7 @@ class Header extends React.Component {
           onChange={this.onChange}
         />
 
-        {this.props.isLoggedIn == false ? (
+        {this.props.isLoggedIn === false ? (
           <div className="account">
             <a href="">E-mail</a>
             <a onClick={() => this.props.authenticate('Github')}>
