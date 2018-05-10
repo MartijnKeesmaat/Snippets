@@ -109,28 +109,30 @@ class App extends Component {
   };
 
   waitForSnippets = input => {
-    const userId = firebase.auth().currentUser.uid;
-    base.listenTo(`users/${userId}/snippets`, {
-      context: this,
-      asArray: true,
-      then() {
-        var here = this;
-        var delay = (function() {
-          var timer = 0;
-          return function(callback, ms) {
-            clearTimeout(timer);
-            timer = setTimeout(callback, ms);
-          };
-        })();
+    if (firebase.auth().currentUser) {
+      const userId = firebase.auth().currentUser.uid;
+      base.listenTo(`users/${userId}/snippets`, {
+        context: this,
+        asArray: true,
+        then() {
+          var here = this;
+          var delay = (function() {
+            var timer = 0;
+            return function(callback, ms) {
+              clearTimeout(timer);
+              timer = setTimeout(callback, ms);
+            };
+          })();
 
-        delay(function() {
-          here.setState({
-            initialSnippets: here.state.snippets
-          });
-          here.getAllLanguages();
-        }, 1);
-      }
-    });
+          delay(function() {
+            here.setState({
+              initialSnippets: here.state.snippets
+            });
+            here.getAllLanguages();
+          }, 1);
+        }
+      });
+    }
   };
 
   authChange = () => {
@@ -138,10 +140,10 @@ class App extends Component {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         here.syncFirebase();
-        if (user.providerData[0].displayName) {
-          const name = user.providerData[0].displayName;
-          toast('Hi ' + name, { autoClose: 3000 });
-        }
+        const name = user.providerData[0].displayName;
+        toast('Hi ' + name, { autoClose: 3000 });
+      } else {
+        alert('log in!');
       }
     });
   };
