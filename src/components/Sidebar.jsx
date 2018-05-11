@@ -27,7 +27,6 @@ class Sidebar extends React.Component {
     this.setState({
       fileComponents
     });
-    console.log(this.state.fileComponents);
   };
 
   removeFile = index => {
