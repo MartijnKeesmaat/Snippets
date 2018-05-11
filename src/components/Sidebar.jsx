@@ -104,7 +104,7 @@ class Sidebar extends React.Component {
               <button
                 className={
                   'btn ' +
-                  (!this.props.hasSnippets && !this.props.isLoading
+                  (!this.props.hasSnippets && this.props.isLoading === false
                     ? 'btn--glow'
                     : '')
                 }
@@ -113,7 +113,7 @@ class Sidebar extends React.Component {
                 Add snippet
               </button>
               {!this.props.hasSnippets &&
-                !this.props.isLoading && <div className="overlay" />}
+                this.props.isLoading === false && <div className="overlay" />}
               <div className="sidebar__links">
                 <button
                   href=""

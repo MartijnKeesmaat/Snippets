@@ -103,9 +103,6 @@ class App extends Component {
     --- FIREBASE ---
   *****/
   syncFirebase = () => {
-    // this.setState({
-    //   isLoading: !this.state.isLoading
-    // });
     const here = this;
     if (firebase.auth().currentUser) {
       const userId = firebase.auth().currentUser.uid;
@@ -141,6 +138,7 @@ class App extends Component {
           })();
 
           delay(function() {
+            here.setState({ isLoading: false });
             here.setState({
               initialSnippets: here.state.snippets
             });
@@ -154,7 +152,6 @@ class App extends Component {
 
   authChange = () => {
     const here = this;
-    this.setState({ isLoading: false });
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         here.syncFirebase();
@@ -272,8 +269,10 @@ class App extends Component {
   };
 
   hasSnippets = () => {
-    if (this.state.snippets.length >= 0) {
-      this.setState({ hasSnippets: !this.state.hasSnippets });
+    if (this.state.snippets.length > 0) {
+      this.setState({ hasSnippets: true });
+    } else {
+      this.setState({ hasSnippets: false });
     }
   };
 
@@ -332,6 +331,7 @@ class App extends Component {
               showSnippetDetail={this.showSnippetDetail}
               labels={this.state.labels}
               isLoading={this.state.isLoading}
+              hasSnippets={this.state.hasSnippets}
             />
             <SnippetDetail
               snippets={this.state.snippets}
