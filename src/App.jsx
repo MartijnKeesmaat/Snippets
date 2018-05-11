@@ -20,7 +20,9 @@ class App extends Component {
     visible: false,
     labels: [],
     authenticated: false,
-    isLoggedIn: false
+    isLoggedIn: false,
+    isLoading: true,
+    hasSnippets: false
   };
 
   /***** 
@@ -101,6 +103,9 @@ class App extends Component {
     --- FIREBASE ---
   *****/
   syncFirebase = () => {
+    // this.setState({
+    //   isLoading: !this.state.isLoading
+    // });
     const here = this;
     if (firebase.auth().currentUser) {
       const userId = firebase.auth().currentUser.uid;
@@ -139,6 +144,7 @@ class App extends Component {
             here.setState({
               initialSnippets: here.state.snippets
             });
+            here.hasSnippets();
             here.getAllLanguages();
           }, 1);
         }
@@ -148,6 +154,7 @@ class App extends Component {
 
   authChange = () => {
     const here = this;
+    this.setState({ isLoading: false });
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         here.syncFirebase();
@@ -205,6 +212,7 @@ class App extends Component {
     this.closeModal();
     this.getAllLanguages();
     toast(snippet.title + ' is added', { autoClose: 3000 });
+    this.hasSnippets();
   };
 
   deleteSnippet = key => {
@@ -215,6 +223,7 @@ class App extends Component {
       initialSnippets,
       snippets: initialSnippets
     });
+    this.hasSnippets();
   };
 
   showSnippetDetail = key => {
@@ -262,6 +271,12 @@ class App extends Component {
     this.setState({ initialSnippets: updatedList });
   };
 
+  hasSnippets = () => {
+    if (this.state.snippets.length >= 0) {
+      this.setState({ hasSnippets: !this.state.hasSnippets });
+    }
+  };
+
   /***** 
     --- REACT ---
   *****/
@@ -299,6 +314,8 @@ class App extends Component {
           labels={this.state.labels}
           addLabel={this.addLabel}
           filterLabel={this.filterLabel}
+          isLoading={this.state.isLoading}
+          hasSnippets={this.state.hasSnippets}
         />
         <div className="nav-content">
           <Header
@@ -314,6 +331,7 @@ class App extends Component {
               initialSnippets={this.state.initialSnippets}
               showSnippetDetail={this.showSnippetDetail}
               labels={this.state.labels}
+              isLoading={this.state.isLoading}
             />
             <SnippetDetail
               snippets={this.state.snippets}
@@ -325,7 +343,8 @@ class App extends Component {
               deleteSnippet={this.deleteSnippet}
               editSnippet={this.editSnippet}
               setLabel={this.setLabel}
-              // labels={labelProp}
+              isLoading={this.state.isLoading}
+              hasSnippets={this.state.hasSnippets}
             />
           </main>
         </div>

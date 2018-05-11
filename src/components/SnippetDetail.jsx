@@ -53,11 +53,14 @@ class SnippetDetail extends React.Component {
     }, 3000);
   };
 
+  // render() {
+  //   return '';
+  // }
   render() {
     const snippets = this.props.initialSnippets;
     const snippetIndex = this.props.activeSnippet;
 
-    if (this.props.initialSnippets.length > 0) {
+    if (!this.props.isLoading && this.props.hasSnippets) {
       this.state.value = snippets[snippetIndex].files[0];
       return (
         <div className="main-content__inner main-content__inner--detail snippet-detail">
@@ -139,7 +142,7 @@ class SnippetDetail extends React.Component {
 
             <hr />
 
-            {snippets[snippetIndex].files[0] != '' &&
+            {snippets[snippetIndex].files[0] !== '' &&
               snippets[snippetIndex].files.map((key, index) => (
                 <div className="editor-detail card" key={index}>
                   <div className="editor-detail__top">
@@ -188,16 +191,19 @@ class SnippetDetail extends React.Component {
           </div>
         </div>
       );
+    } else if (!this.props.hasSnippets && !this.props.isLoading) {
+      return <p>Add a snippet</p>;
+    } else if (this.props.isLoading) {
+      return (
+        <div className="main-content__inner main-content__inner--detail">
+          <img
+            src="http://4.bp.blogspot.com/-jpc1AQcAQgs/VC5cvqiykgI/AAAAAAAAMwE/r8lj3LcIvh8/s1600/15-10%2B~%2BGIF%2B~%2BPlease%2BWait.gif"
+            alt="Loading"
+            className="loader"
+          />
+        </div>
+      );
     }
-    return (
-      <div className="main-content__inner main-content__inner--detail">
-        <img
-          src="http://4.bp.blogspot.com/-jpc1AQcAQgs/VC5cvqiykgI/AAAAAAAAMwE/r8lj3LcIvh8/s1600/15-10%2B~%2BGIF%2B~%2BPlease%2BWait.gif"
-          alt="Loading"
-          className="loader"
-        />
-      </div>
-    );
   }
 }
 

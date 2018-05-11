@@ -1,5 +1,4 @@
 .btn
-	// background: $overlay-vertical
 	background-image: linear-gradient(to right, #949eff 0%, #746fec 51%, #c6a1f7 100%);
 	transition: $transition2 
 	box-shadow: $shadow-sm
@@ -24,6 +23,23 @@
 		box-shadow: $shadow-md
 		color: #fff
 
+	&--glow
+		$color: #00BFFF
+		$size: 8em
+		$pulse-period: 3s
+
+		z-index: 3
+		animation: pulse $pulse-period infinite
+		border-radius: 0
+
+		@at-root
+			@keyframes pulse
+				0%
+					box-shadow: 0 0 0 0 rgba(red($color), green($color), blue($color), 0.4)
+				20%
+					box-shadow: 0 0 0 calc(#{$size} / 6) rgba(red($color),green($color),blue($color), 0)
+				100%
+					box-shadow: 0 0 0 0 rgba(red($color), green($color),blue($color), 0)
 
 // color black
 .btn--black

@@ -101,10 +101,19 @@ class Sidebar extends React.Component {
           <div className="scroll-container">
             <div className="sidebar__inner">
               <h3>Snippets</h3>
-              <button className="btn" onClick={this.props.openModal}>
+              <button
+                className={
+                  'btn ' +
+                  (!this.props.hasSnippets && !this.props.isLoading
+                    ? 'btn--glow'
+                    : '')
+                }
+                onClick={this.props.openModal}
+              >
                 Add snippet
               </button>
-
+              {!this.props.hasSnippets &&
+                !this.props.isLoading && <div className="overlay" />}
               <div className="sidebar__links">
                 <button
                   href=""
@@ -122,7 +131,6 @@ class Sidebar extends React.Component {
                   Favorites
                 </button>
               </div>
-
               <div className="sidebar__links">
                 <div className="sidebar__links__label-header">
                   <h3>Labels</h3>
@@ -154,7 +162,6 @@ class Sidebar extends React.Component {
                     </button>
                   ))}
               </div>
-
               <div className="sidebar__links sidebar__links--lang">
                 <h3>Languages</h3>
                 {this.props.initialSnippets.length > 0 &&
