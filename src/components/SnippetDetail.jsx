@@ -23,15 +23,18 @@ class SnippetDetail extends React.Component {
     copied: false
   };
 
-  addLabel = e => {
+  setLabel = e => {
+    const snippets = this.props.snippets;
     const labelArr = this.props.snippets[this.props.activeSnippet].labels;
     const selectedOption = e.target.options[
       e.target.options.selectedIndex
     ].text.toLowerCase();
 
-    labelArr.push(selectedOption);
+    if (labelArr.indexOf(selectedOption) <= 0) {
+      labelArr.push(selectedOption);
+    }
 
-    this.setState({});
+    this.props.setLabel(labelArr);
   };
 
   copyCode = () => {
@@ -53,8 +56,6 @@ class SnippetDetail extends React.Component {
   render() {
     const snippets = this.props.initialSnippets;
     const snippetIndex = this.props.activeSnippet;
-    // const labelArr = this.props.snippets[this.props.activeSnippet].labels;
-    const labelArr = [];
 
     if (this.props.initialSnippets.length > 0) {
       this.state.value = snippets[snippetIndex].files[0];
@@ -97,13 +98,11 @@ class SnippetDetail extends React.Component {
                   </div>
                 )}
 
-                {labelArr.map((label, key) => (
-                  <option value={label} key={key}>
+                {this.props.labels.map((label, key) => (
+                  <div key={key} className="card snippet__label">
                     {label}
-                  </option>
+                  </div>
                 ))}
-                <div className="card snippet__label">Docs</div>
-                <div className="card snippet__label">Very nice</div>
               </div>
 
               <div className="snippet-detail__label-bar__control">
@@ -123,7 +122,7 @@ class SnippetDetail extends React.Component {
                 )}
                 <select
                   onClick={this.props.editSnippet}
-                  onChange={this.addLabel}
+                  onChange={this.setLabel}
                 >
                   <option selected disabled value="label">
                     Labels
@@ -140,51 +139,52 @@ class SnippetDetail extends React.Component {
 
             <hr />
 
-            {snippets[snippetIndex].files.map((key, index) => (
-              <div className="editor-detail card" key={index}>
-                <div className="editor-detail__top">
-                  <p className="editor-detail__top__lang">
-                    {snippets[snippetIndex].languages[index]}
-                  </p>
+            {snippets[snippetIndex].files == true &&
+              snippets[snippetIndex].files.map((key, index) => (
+                <div className="editor-detail card" key={index}>
+                  <div className="editor-detail__top">
+                    <p className="editor-detail__top__lang">
+                      {snippets[snippetIndex].languages[index]}
+                    </p>
 
-                  <CopyToClipboard
-                    text={snippets[snippetIndex].files[index]}
-                    onCopy={() => this.copyCode()}
-                  >
-                    <button className="editor-detail__copy">
-                      {this.state.copied ? (
-                        <span className={'copied'}>Copied</span>
-                      ) : (
-                        <span>Copy code</span>
-                      )}
-                    </button>
-                  </CopyToClipboard>
+                    <CopyToClipboard
+                      text={snippets[snippetIndex].files[index]}
+                      onCopy={() => this.copyCode()}
+                    >
+                      <button className="editor-detail__copy">
+                        {this.state.copied ? (
+                          <span className={'copied'}>Copied</span>
+                        ) : (
+                          <span>Copy code</span>
+                        )}
+                      </button>
+                    </CopyToClipboard>
+                  </div>
+                  <AceEditor
+                    mode={this.state.mode}
+                    theme={this.state.theme}
+                    editorProps={{ $blockScrolling: Infinity }}
+                    onValidate={this.onValidate}
+                    value={snippets[snippetIndex].files[index]}
+                    fontSize={this.state.fontSize}
+                    showPrintMargin={this.state.showPrintMargin}
+                    showGutter={this.state.showGutter}
+                    height={'300px'}
+                    width={'100%'}
+                    highlightActiveLine={this.state.highlightActiveLine}
+                    readOnly={true}
+                    setOptions={{
+                      enableBasicAutocompletion: this.state
+                        .enableBasicAutocompletion,
+                      enableLiveAutocompletion: this.state
+                        .enableLiveAutocompletion,
+                      enableSnippets: this.state.enableSnippets,
+                      showLineNumbers: this.state.showLineNumbers,
+                      tabSize: 2
+                    }}
+                  />
                 </div>
-                <AceEditor
-                  mode={this.state.mode}
-                  theme={this.state.theme}
-                  editorProps={{ $blockScrolling: Infinity }}
-                  onValidate={this.onValidate}
-                  value={snippets[snippetIndex].files[index]}
-                  fontSize={this.state.fontSize}
-                  showPrintMargin={this.state.showPrintMargin}
-                  showGutter={this.state.showGutter}
-                  height={'300px'}
-                  width={'100%'}
-                  highlightActiveLine={this.state.highlightActiveLine}
-                  readOnly={true}
-                  setOptions={{
-                    enableBasicAutocompletion: this.state
-                      .enableBasicAutocompletion,
-                    enableLiveAutocompletion: this.state
-                      .enableLiveAutocompletion,
-                    enableSnippets: this.state.enableSnippets,
-                    showLineNumbers: this.state.showLineNumbers,
-                    tabSize: 2
-                  }}
-                />
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       );

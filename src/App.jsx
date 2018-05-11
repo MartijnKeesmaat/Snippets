@@ -34,6 +34,15 @@ class App extends Component {
     });
   };
 
+  setLabel = labelArr => {
+    const snippets = this.state.snippets;
+    snippets[this.state.activeSnippet].labels = labelArr;
+    this.setState({
+      snippets
+    });
+    console.log(labelArr);
+  };
+
   filterLanguage = e => {
     this.setState({
       activeSnippet: 0
@@ -60,7 +69,9 @@ class App extends Component {
 
     // get every value and spread it in a new arr
     for (let i = 0; i < this.state.snippets.length; i++) {
-      allLangs.push(...this.state.snippets[i].languages);
+      if (this.state.snippets[i].languages) {
+        allLangs.push(...this.state.snippets[i].languages);
+      }
     }
     // rm duplicates from combined arr
     filteredLangs = removeDuplicates(allLangs);
@@ -68,7 +79,7 @@ class App extends Component {
   };
 
   filterLabel = () => {
-    toast("Doesn't work yet :(", { autoClose: 3000 });
+    // toast("Doesn't work yet :(", { autoClose: 3000 });
   };
 
   /***** 
@@ -313,6 +324,8 @@ class App extends Component {
               labels={this.state.labels}
               deleteSnippet={this.deleteSnippet}
               editSnippet={this.editSnippet}
+              setLabel={this.setLabel}
+              // labels={labelProp}
             />
           </main>
         </div>
