@@ -139,7 +139,7 @@ class SnippetDetail extends React.Component {
 
             <hr />
 
-            {snippets[snippetIndex].files == true &&
+            {snippets[snippetIndex].files[0] != '' &&
               snippets[snippetIndex].files.map((key, index) => (
                 <div className="editor-detail card" key={index}>
                   <div className="editor-detail__top">
