@@ -92,7 +92,7 @@ figure {
   display: flex; }
 
 .card {
-  box-shadow: 2px 2px 5px 0 rgba(39, 62, 84, 0.11);
+  box-shadow: 2px 2px 5px 0 rgba(39, 62, 84, 0.09);
   background: #fff; }
 
 .nav-content {
@@ -367,6 +367,10 @@ header {
   padding: 25px;
   position: relative;
   z-index: 10; }
+  .snippet--active {
+    box-shadow: 2px 2px 19px 2px rgba(147, 157, 254, 0.2); }
+    .snippet--active:hover {
+      box-shadow: 2px 2px 22px 3px rgba(147, 157, 254, 0.1) !important; }
   .snippet h4 {
     font-size: 1.8rem;
     font-weight: 700;

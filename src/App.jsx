@@ -425,6 +425,7 @@ class App extends Component {
               labels={this.state.labels}
               isLoading={this.state.isLoading}
               hasSnippets={this.state.hasSnippets}
+              activeSnippet={this.state.activeSnippet}
               hasInitialSnippets={this.state.hasInitialSnippets}
             />
             <SnippetDetail

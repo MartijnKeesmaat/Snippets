@@ -5,7 +5,12 @@ class Snippets extends React.Component {
     const details = this.props.details;
     return (
       <div
-        className="snippet card"
+        className={
+          'snippet card ' +
+          (this.props.activeSnippet === this.props.index
+            ? 'snippet--active'
+            : '')
+        }
         onClick={() => this.props.showSnippetDetail(this.props.index)}
       >
         <h4>{details.title}</h4>

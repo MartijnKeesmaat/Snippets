@@ -20,6 +20,7 @@ class Snippets extends React.Component {
                   index={key}
                   details={this.props.initialSnippets[key]}
                   showSnippetDetail={this.props.showSnippetDetail}
+                  activeSnippet={this.props.activeSnippet}
                 />
               ))}
           </div>
