@@ -121,7 +121,7 @@ class Sidebar extends React.Component {
                 <button
                   href=""
                   onClick={this.props.showAllSnippets}
-                  className="sidebar__link"
+                  className="sidebar__link sidebar__link--active"
                 >
                   <img src={require('../icons/code.svg')} alt="" />
                   All snippets
@@ -152,32 +152,30 @@ class Sidebar extends React.Component {
                     </button>
                   </form>
                 )}
-                {this.props.initialSnippets.length > 0 &&
-                  this.props.labels.map((label, key) => (
-                    <button
-                      onClick={this.filterLabel}
-                      href=""
-                      className="sidebar__link"
-                      key={key}
-                    >
-                      <span className="sidebar__label__icon" />
-                      {label}
-                    </button>
-                  ))}
+                {this.props.labels.map((label, key) => (
+                  <button
+                    onClick={this.filterLabel}
+                    href=""
+                    className="sidebar__link"
+                    key={key}
+                  >
+                    <span className="sidebar__label__icon" />
+                    {label}
+                  </button>
+                ))}
               </div>
               <div className="sidebar__links sidebar__links--lang">
                 <h3>Languages</h3>
-                {this.props.initialSnippets.length > 0 &&
-                  this.props.languages.map((lang, key) => (
-                    <button
-                      className="sidebar__link"
-                      onClick={e => this.props.filterLanguage(e)}
-                      key={key}
-                    >
-                      <img src={require('../icons/hash.svg')} alt="" />
-                      {lang}
-                    </button>
-                  ))}
+                {this.props.languages.map((lang, key) => (
+                  <button
+                    className="sidebar__link"
+                    onClick={e => this.props.filterLanguage(e)}
+                    key={key}
+                  >
+                    <img src={require('../icons/hash.svg')} alt="" />
+                    {lang}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
