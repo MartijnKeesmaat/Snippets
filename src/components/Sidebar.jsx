@@ -127,7 +127,7 @@ class Sidebar extends React.Component {
                   All snippets
                 </button>
                 <button
-                  onClick={this.props.showFavorites}
+                  onClick={this.props.filterFavorites}
                   className="sidebar__link"
                 >
                   <img src={require('../icons/fav.svg')} alt="" />

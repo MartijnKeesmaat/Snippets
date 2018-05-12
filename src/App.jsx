@@ -45,29 +45,6 @@ class App extends Component {
     });
   };
 
-  filterLanguage = e => {
-    this.setState({
-      activeSnippet: 0
-    });
-    const clickedLang = e.target.textContent;
-    let updatedList = this.state.snippets; //reset list when another is clicked
-    updatedList = updatedList.filter(snippet => {
-      if (snippet.languages) {
-        return (
-          //TODO clean this snippet.languages[0] === clickedLang ||
-          snippet.languages[0] === clickedLang ||
-          snippet.languages[1] === clickedLang ||
-          snippet.languages[2] === clickedLang ||
-          snippet.languages[3] === clickedLang ||
-          snippet.languages[4] === clickedLang ||
-          snippet.languages[5] === clickedLang
-        );
-      }
-    });
-    this.setState({ initialSnippets: updatedList });
-    this.setActiveClass(e);
-  };
-
   setActiveClass = e => {
     const selector = e.currentTarget;
     const all = document.querySelectorAll('.sidebar__link');
@@ -95,14 +72,46 @@ class App extends Component {
     // }
   };
 
+  showAllSnippets = e => {
+    this.setState({ initialSnippets: this.state.snippets });
+    this.setActiveClass(e);
+    this.hasSnippets();
+  };
+
+  filterLanguage = e => {
+    this.setState({ initialSnippets: this.state.snippets });
+    this.setState({
+      activeSnippet: 0
+    });
+    const clickedLang = e.target.textContent;
+    let updatedList = this.state.snippets; //reset list when another is clicked
+    updatedList = updatedList.filter(snippet => {
+      if (snippet.languages) {
+        return (
+          //TODO clean this snippet.languages[0] === clickedLang ||
+          snippet.languages[0] === clickedLang ||
+          snippet.languages[1] === clickedLang ||
+          snippet.languages[2] === clickedLang ||
+          snippet.languages[3] === clickedLang ||
+          snippet.languages[4] === clickedLang ||
+          snippet.languages[5] === clickedLang
+        );
+      }
+    });
+    this.setState({ initialSnippets: updatedList });
+    this.setActiveClass(e);
+    this.hasSnippets();
+  };
+
   filterLabel = e => {
     this.setActiveClass(e);
+    this.setState({ initialSnippets: this.state.snippets });
 
     const value = e.currentTarget.textContent.toLowerCase();
     let updatedList = this.state.snippets; //reset list when another is clicked
     updatedList = updatedList.filter(snippet => {
       return (
-        //TODO clean this snippet.languages[0] === clickedLang ||
+        //TODO clean this
         snippet.labels[0] === value ||
         snippet.labels[1] === value ||
         snippet.labels[2] === value ||
@@ -115,6 +124,29 @@ class App extends Component {
       activeSnippet: 0
     });
     this.setState({ initialSnippets: updatedList });
+    this.hasSnippets();
+  };
+
+  filterFavorites = e => {
+    this.setActiveClass(e);
+
+    var here = this;
+    var delay = (function() {
+      var timer = 0;
+      return function(callback, ms) {
+        clearTimeout(timer);
+        timer = setTimeout(callback, ms);
+      };
+    })();
+
+    delay(function() {
+      here.setState({ initialSnippets: here.state.snippets });
+      let updatedList = here.state.initialSnippets;
+      updatedList = updatedList.filter(snippet => {
+        return snippet.favorite === true;
+      });
+      here.setState({ initialSnippets: updatedList });
+    }, 1);
     this.hasSnippets();
   };
 
@@ -288,34 +320,6 @@ class App extends Component {
     });
   };
 
-  showFavorites = e => {
-    this.setActiveClass(e);
-
-    var here = this;
-    var delay = (function() {
-      var timer = 0;
-      return function(callback, ms) {
-        clearTimeout(timer);
-        timer = setTimeout(callback, ms);
-      };
-    })();
-
-    delay(function() {
-      here.setState({ initialSnippets: here.state.snippets });
-      let updatedList = here.state.initialSnippets;
-      updatedList = updatedList.filter(snippet => {
-        return snippet.favorite === true;
-      });
-      here.setState({ initialSnippets: updatedList });
-    }, 1);
-  };
-
-  showAllSnippets = e => {
-    this.setState({ initialSnippets: this.state.snippets });
-    this.setActiveClass(e);
-    this.hasSnippets();
-  };
-
   searchSnippets = event => {
     let updatedList = this.state.initialSnippets;
     if (event.target.value.length === 0) {
@@ -388,7 +392,7 @@ class App extends Component {
           openModal={this.openModal}
           closeModal={this.closeModal}
           visible={this.state.visible}
-          showFavorites={this.showFavorites}
+          filterFavorites={this.filterFavorites}
           showAllSnippets={this.showAllSnippets}
           initialSnippets={this.state.initialSnippets}
           languages={this.state.languages}
