@@ -382,7 +382,7 @@ header {
     margin-right: 12px;
     border-left: 3px solid pink;
     min-width: 100px;
-    padding: .6em;
+    padding: .6em 1.2em;
     text-align: center;
     font-weight: 700; }
     .snippet__label--fav {
