@@ -11,7 +11,7 @@ class Header extends React.Component {
         <a href="">Filter</a>
         <input
           type="text"
-          placeholder="filter this.."
+          placeholder="Search title.."
           onChange={this.onChange}
         />
 

@@ -16,9 +16,13 @@ class Snippets extends React.Component {
               Favorite
             </div>
           )}
-          {/* {labelArr.map((label, key) => (
-            <div className="card snippet__label">Docs</div>
-          ))} */}
+          {details.labels &&
+            details.labels[0] !== '' &&
+            details.labels.map((label, key) => (
+              <div key={key} className="card snippet__label">
+                {label}
+              </div>
+            ))}
         </div>
       </div>
     );

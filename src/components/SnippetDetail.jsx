@@ -25,13 +25,22 @@ class SnippetDetail extends React.Component {
 
   setLabel = e => {
     const snippets = this.props.snippets;
-    const labelArr = this.props.snippets[this.props.activeSnippet].labels;
+    let labelArr = this.props.snippets[this.props.activeSnippet].labels;
+
     const selectedOption = e.target.options[
       e.target.options.selectedIndex
     ].text.toLowerCase();
 
-    if (labelArr.indexOf(selectedOption) <= 0) {
+    if (labelArr.indexOf(selectedOption) < 0) {
       labelArr.push(selectedOption);
+    } else {
+      labelArr.splice(labelArr.indexOf(selectedOption), 1);
+    }
+
+    if (labelArr.indexOf('') >= 0 && labelArr.length > 1) {
+      labelArr.shift();
+    } else if (labelArr.length === 0) {
+      labelArr.push('');
     }
 
     this.props.setLabel(labelArr);
@@ -100,11 +109,13 @@ class SnippetDetail extends React.Component {
                   </div>
                 )}
 
-                {this.props.labels.map((label, key) => (
-                  <div key={key} className="card snippet__label">
-                    {label}
-                  </div>
-                ))}
+                {snippets[snippetIndex].labels &&
+                  snippets[snippetIndex].labels[0] !== '' &&
+                  snippets[snippetIndex].labels.map((label, key) => (
+                    <div key={key} className="card snippet__label">
+                      {label}
+                    </div>
+                  ))}
               </div>
 
               <div className="snippet-detail__label-bar__control">

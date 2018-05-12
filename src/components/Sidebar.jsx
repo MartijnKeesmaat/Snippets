@@ -55,7 +55,7 @@ class Sidebar extends React.Component {
       dateCreated: getCurrentDate(),
       timeCreated: getCurrentTime(),
       favorite: false,
-      labels: []
+      labels: ['']
     };
     this.props.addSnippet(snippet);
     e.currentTarget.reset();

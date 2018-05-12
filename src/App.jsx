@@ -37,12 +37,12 @@ class App extends Component {
   };
 
   setLabel = labelArr => {
+    console.log(this.state.snippets[this.state.activeSnippet]);
     const snippets = this.state.snippets;
     snippets[this.state.activeSnippet].labels = labelArr;
     this.setState({
       snippets
     });
-    console.log(labelArr);
   };
 
   filterLanguage = e => {
@@ -230,7 +230,7 @@ class App extends Component {
   };
 
   editSnippet = () => {
-    toast("Doesn't work yet :(", { autoClose: 3000 });
+    // toast("Doesn't work yet :(", { autoClose: 3000 });
   };
 
   setFavorite = snippetIndex => {
