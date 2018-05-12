@@ -38,7 +38,6 @@ class App extends Component {
   };
 
   setLabel = labelArr => {
-    console.log(this.state.snippets[this.state.activeSnippet]);
     const snippets = this.state.snippets;
     snippets[this.state.activeSnippet].labels = labelArr;
     this.setState({
@@ -53,15 +52,17 @@ class App extends Component {
     const clickedLang = e.target.textContent;
     let updatedList = this.state.snippets; //reset list when another is clicked
     updatedList = updatedList.filter(snippet => {
-      return (
-        //TODO clean this snippet.languages[0] === clickedLang ||
-        snippet.languages[0] === clickedLang ||
-        snippet.languages[1] === clickedLang ||
-        snippet.languages[2] === clickedLang ||
-        snippet.languages[3] === clickedLang ||
-        snippet.languages[4] === clickedLang ||
-        snippet.languages[5] === clickedLang
-      );
+      if (snippet.languages) {
+        return (
+          //TODO clean this snippet.languages[0] === clickedLang ||
+          snippet.languages[0] === clickedLang ||
+          snippet.languages[1] === clickedLang ||
+          snippet.languages[2] === clickedLang ||
+          snippet.languages[3] === clickedLang ||
+          snippet.languages[4] === clickedLang ||
+          snippet.languages[5] === clickedLang
+        );
+      }
     });
     this.setState({ initialSnippets: updatedList });
     this.setActiveClass(e);
@@ -95,8 +96,6 @@ class App extends Component {
   };
 
   filterLabel = e => {
-    this.hasSnippets();
-
     this.setActiveClass(e);
 
     const value = e.currentTarget.textContent.toLowerCase();
@@ -116,6 +115,7 @@ class App extends Component {
       activeSnippet: 0
     });
     this.setState({ initialSnippets: updatedList });
+    this.hasSnippets();
   };
 
   getAllLanguages = () => {
@@ -204,8 +204,6 @@ class App extends Component {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         here.syncFirebase();
-      } else {
-        // alert('log in!');
       }
     });
   };
@@ -291,18 +289,31 @@ class App extends Component {
   };
 
   showFavorites = e => {
-    this.setState({ initialSnippets: this.state.snippets });
-    let updatedList = this.state.initialSnippets;
-    updatedList = updatedList.filter(snippet => {
-      return snippet.favorite === true;
-    });
-    this.setState({ initialSnippets: updatedList });
     this.setActiveClass(e);
+
+    var here = this;
+    var delay = (function() {
+      var timer = 0;
+      return function(callback, ms) {
+        clearTimeout(timer);
+        timer = setTimeout(callback, ms);
+      };
+    })();
+
+    delay(function() {
+      here.setState({ initialSnippets: here.state.snippets });
+      let updatedList = here.state.initialSnippets;
+      updatedList = updatedList.filter(snippet => {
+        return snippet.favorite === true;
+      });
+      here.setState({ initialSnippets: updatedList });
+    }, 1);
   };
 
   showAllSnippets = e => {
     this.setState({ initialSnippets: this.state.snippets });
     this.setActiveClass(e);
+    this.hasSnippets();
   };
 
   searchSnippets = event => {
@@ -321,20 +332,23 @@ class App extends Component {
   };
 
   hasInitialSnippets = () => {
-    console.log(1);
+    var here = this;
+    var delay = (function() {
+      var timer = 0;
+      return function(callback, ms) {
+        clearTimeout(timer);
+        timer = setTimeout(callback, ms);
+      };
+    })();
 
-    if (this.state.initialSnippets.length > 0) {
-      this.setState({ hasInitialSnippets: true });
-      console.log(2);
-    } else {
-      this.setState({ hasInitialSnippets: false });
-      console.log(3);
-    }
+    delay(function() {
+      if (here.state.initialSnippets.length >= 1) {
+        here.setState({ hasInitialSnippets: true });
+      } else {
+        here.setState({ hasInitialSnippets: false });
+      }
+    }, 1);
   };
-
-  componentDidUpdate() {
-    console.log('length ' + this.state.initialSnippets.length);
-  }
 
   hasSnippets = () => {
     if (this.state.snippets.length > 0) {
@@ -343,7 +357,6 @@ class App extends Component {
       this.setState({ hasSnippets: false });
     }
     this.hasInitialSnippets();
-    console.log(this.state.hasInitialSnippets);
   };
 
   /***** 
