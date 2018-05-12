@@ -66,7 +66,13 @@ class SnippetDetail extends React.Component {
     const snippets = this.props.initialSnippets;
     const snippetIndex = this.props.activeSnippet;
 
-    if (!this.props.isLoading && this.props.hasSnippets) {
+    if (
+      !this.props.isLoading &&
+      this.props.hasSnippets &&
+      this.props.hasInitialSnippets &&
+      this.props.initialSnippets &&
+      this.props.initialSnippets.length > 0
+    ) {
       if (snippets[snippetIndex].files) {
         this.state.value = snippets[snippetIndex].files[0];
       }

@@ -22,7 +22,8 @@ class App extends Component {
     authenticated: false,
     isLoggedIn: false,
     isLoading: true,
-    hasSnippets: false
+    hasSnippets: false,
+    hasInitialSnippets: false
   };
 
   /***** 
@@ -63,6 +64,58 @@ class App extends Component {
       );
     });
     this.setState({ initialSnippets: updatedList });
+    this.setActiveClass(e);
+  };
+
+  setActiveClass = e => {
+    const selector = e.currentTarget;
+    const all = document.querySelectorAll('.sidebar__link');
+    for (let i = 0; i < all.length; i++) {
+      all[i].classList.remove('sidebar__link--active');
+    }
+
+    selector.classList.add('sidebar__link--active');
+
+    // dont use this, but very usefull and clean
+    // function getChildren(n, skipMe) {
+    //   var r = [];
+    //   for (; n; n = n.nextSibling)
+    //     if (n.nodeType == 1 && n != skipMe) r.push(n);
+    //   return r;
+    // }
+
+    // function getSiblings(n) {
+    //   return getChildren(n.parentNode.firstChild, n);
+    // }
+
+    // const siblings = getSiblings(selector);
+    // for (let i = 0; i < siblings.length; i++) {
+    //   siblings[i].classList.remove('sidebar__link--active');
+    // }
+  };
+
+  filterLabel = e => {
+    this.hasSnippets();
+
+    this.setActiveClass(e);
+
+    const value = e.currentTarget.textContent.toLowerCase();
+    let updatedList = this.state.snippets; //reset list when another is clicked
+    updatedList = updatedList.filter(snippet => {
+      return (
+        //TODO clean this snippet.languages[0] === clickedLang ||
+        snippet.labels[0] === value ||
+        snippet.labels[1] === value ||
+        snippet.labels[2] === value ||
+        snippet.labels[3] === value ||
+        snippet.labels[4] === value ||
+        snippet.labels[5] === value
+      );
+    });
+    this.setState({
+      activeSnippet: 0
+    });
+    this.setState({ initialSnippets: updatedList });
   };
 
   getAllLanguages = () => {
@@ -78,10 +131,6 @@ class App extends Component {
     // rm duplicates from combined arr
     filteredLangs = removeDuplicates(allLangs);
     this.setState({ languages: filteredLangs });
-  };
-
-  filterLabel = () => {
-    // toast("Doesn't work yet :(", { autoClose: 3000 });
   };
 
   /***** 
@@ -241,16 +290,19 @@ class App extends Component {
     });
   };
 
-  showFavorites = () => {
+  showFavorites = e => {
+    this.setState({ initialSnippets: this.state.snippets });
     let updatedList = this.state.initialSnippets;
     updatedList = updatedList.filter(snippet => {
       return snippet.favorite === true;
     });
     this.setState({ initialSnippets: updatedList });
+    this.setActiveClass(e);
   };
 
-  showAllSnippets = () => {
+  showAllSnippets = e => {
     this.setState({ initialSnippets: this.state.snippets });
+    this.setActiveClass(e);
   };
 
   searchSnippets = event => {
@@ -268,12 +320,30 @@ class App extends Component {
     this.setState({ initialSnippets: updatedList });
   };
 
+  hasInitialSnippets = () => {
+    console.log(1);
+
+    if (this.state.initialSnippets.length > 0) {
+      this.setState({ hasInitialSnippets: true });
+      console.log(2);
+    } else {
+      this.setState({ hasInitialSnippets: false });
+      console.log(3);
+    }
+  };
+
+  componentDidUpdate() {
+    console.log('length ' + this.state.initialSnippets.length);
+  }
+
   hasSnippets = () => {
     if (this.state.snippets.length > 0) {
       this.setState({ hasSnippets: true });
     } else {
       this.setState({ hasSnippets: false });
     }
+    this.hasInitialSnippets();
+    console.log(this.state.hasInitialSnippets);
   };
 
   /***** 
@@ -315,6 +385,7 @@ class App extends Component {
           filterLabel={this.filterLabel}
           isLoading={this.state.isLoading}
           hasSnippets={this.state.hasSnippets}
+          hasInitialSnippets={this.state.hasInitialSnippets}
         />
         <div className="nav-content">
           <Header
@@ -332,6 +403,7 @@ class App extends Component {
               labels={this.state.labels}
               isLoading={this.state.isLoading}
               hasSnippets={this.state.hasSnippets}
+              hasInitialSnippets={this.state.hasInitialSnippets}
             />
             <SnippetDetail
               snippets={this.state.snippets}
@@ -345,6 +417,7 @@ class App extends Component {
               setLabel={this.setLabel}
               isLoading={this.state.isLoading}
               hasSnippets={this.state.hasSnippets}
+              hasInitialSnippets={this.state.hasInitialSnippets}
             />
           </main>
         </div>

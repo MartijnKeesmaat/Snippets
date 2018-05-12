@@ -93,6 +93,10 @@ class Sidebar extends React.Component {
     }
   };
 
+  filterLabel = e => {
+    this.props.filterLabel(e);
+  };
+
   render() {
     return (
       <div>
@@ -151,7 +155,7 @@ class Sidebar extends React.Component {
                 {this.props.initialSnippets.length > 0 &&
                   this.props.labels.map((label, key) => (
                     <button
-                      onClick={this.props.filterLabel}
+                      onClick={this.filterLabel}
                       href=""
                       className="sidebar__link"
                       key={key}

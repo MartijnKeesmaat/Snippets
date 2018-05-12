@@ -557,6 +557,9 @@ header {
     font-family: inherit;
     padding: 0;
     cursor: pointer; }
+    .sidebar__link--active {
+      letter-spacing: 1.3px;
+      color: #949eff; }
     .sidebar__link:last-child {
       margin-bottom: 0; }
     .sidebar__link:focus {
