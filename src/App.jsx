@@ -299,6 +299,11 @@ class App extends Component {
       initialSnippets,
       snippets: initialSnippets
     });
+
+    if (this.state.activeSnippet !== 0) {
+      const activeSnippet = this.state.activeSnippet - 1;
+      this.setState({ activeSnippet });
+    }
     this.hasSnippets();
   };
 
