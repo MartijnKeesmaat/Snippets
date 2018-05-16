@@ -128,6 +128,9 @@ class App extends Component {
   };
 
   filterFavorites = e => {
+    this.setState({
+      activeSnippet: 0
+    });
     this.setActiveClass(e);
 
     var here = this;
@@ -332,10 +335,9 @@ class App extends Component {
       return;
     }
     updatedList = updatedList.filter(snippet => {
-      return (
-        snippet.title.toLowerCase().search(event.target.value.toLowerCase()) !==
-        -1
-      );
+      const title = snippet.title.toLowerCase();
+      const searchedValue = event.target.value.toLowerCase();
+      return title.search(searchedValue) !== -1; //search returns position if not found, -1
     });
     this.setState({ initialSnippets: updatedList });
   };
