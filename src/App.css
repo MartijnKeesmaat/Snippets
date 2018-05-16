@@ -378,7 +378,9 @@ header {
   .snippet p {
     max-width: 310px; }
   .snippet__labels {
-    display: flex; }
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: -13px; }
   .snippet__label {
     text-transform: uppercase;
     font-size: 1.1rem;
@@ -388,7 +390,8 @@ header {
     min-width: 100px;
     padding: .6em 1.2em;
     text-align: center;
-    font-weight: 700; }
+    font-weight: 700;
+    margin-bottom: 13px; }
     .snippet__label--fav {
       background: linear-gradient(to right, #FDA085, #F6D365);
       border: none;

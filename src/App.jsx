@@ -336,8 +336,11 @@ class App extends Component {
     }
     updatedList = updatedList.filter(snippet => {
       const title = snippet.title.toLowerCase();
+      const desc = snippet.description.toLowerCase();
       const searchedValue = event.target.value.toLowerCase();
-      return title.search(searchedValue) !== -1; //search returns position if not found, -1
+      return (
+        title.search(searchedValue) !== -1 || desc.search(searchedValue) !== -1
+      ); //search returns position if not found, -1
     });
     this.setState({ initialSnippets: updatedList });
   };
