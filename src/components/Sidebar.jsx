@@ -6,7 +6,7 @@ import { getCurrentDate, getCurrentTime } from '../helpers';
 class Sidebar extends React.Component {
   state = {
     snippetCode: [''],
-    fileComponents: [],
+    fileComponents: ['comp'],
     lang: [],
     addLabel: false
   };
@@ -224,7 +224,7 @@ class Sidebar extends React.Component {
                 ))}
 
                 <a className="add-file" onClick={this.addFile}>
-                  + Add file
+                  + Add code
                 </a>
                 <button type="submit" className="btn">
                   Add snippet

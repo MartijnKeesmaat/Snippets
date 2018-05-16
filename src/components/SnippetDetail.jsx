@@ -126,11 +126,13 @@ class SnippetDetail extends React.Component {
 
               <div className="snippet-detail__label-bar__control">
                 {snippets[snippetIndex].favorite && (
-                  <img
-                    onClick={() => this.props.setFavorite(snippetIndex)}
-                    src={require('../icons/fav.svg')}
-                    alt=""
-                  />
+                  <span className="snippet-detail__label-bar__control__fav">
+                    <img
+                      onClick={() => this.props.setFavorite(snippetIndex)}
+                      src={require('../icons/fav.svg')}
+                      alt=""
+                    />
+                  </span>
                 )}
                 {!snippets[snippetIndex].favorite && (
                   <img
