@@ -31,6 +31,9 @@ export function getCurrentTime() {
   const d = new Date();
   const h = d.getHours();
   const min = d.getMinutes();
+  if (min < 10) {
+    return h + ':' + 0 + min;
+  }
   return h + ':' + min;
 }
 
