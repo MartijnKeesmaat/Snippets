@@ -27,165 +27,10 @@ class App extends Component {
   };
 
   /***** 
-    --- SIDEBAR ---
+     FIREBASE 
   *****/
-  addLabel = labelName => {
-    let labels = this.state.labels;
-    labels.push(labelName);
-    this.setState({
-      labels
-    });
-  };
 
-  setLabel = labelArr => {
-    const snippets = this.state.snippets;
-    snippets[this.state.activeSnippet].labels = labelArr;
-    this.setState({
-      snippets
-    });
-  };
-
-  setActiveClass = e => {
-    const selector = e.currentTarget;
-    const all = document.querySelectorAll('.sidebar__link');
-    for (let i = 0; i < all.length; i++) {
-      all[i].classList.remove('sidebar__link--active');
-    }
-
-    selector.classList.add('sidebar__link--active');
-
-    // dont use this, but very usefull and clean
-    // function getChildren(n, skipMe) {
-    //   var r = [];
-    //   for (; n; n = n.nextSibling)
-    //     if (n.nodeType == 1 && n != skipMe) r.push(n);
-    //   return r;
-    // }
-
-    // function getSiblings(n) {
-    //   return getChildren(n.parentNode.firstChild, n);
-    // }
-
-    // const siblings = getSiblings(selector);
-    // for (let i = 0; i < siblings.length; i++) {
-    //   siblings[i].classList.remove('sidebar__link--active');
-    // }
-  };
-
-  showAllSnippets = e => {
-    this.setState({ initialSnippets: this.state.snippets });
-    this.setActiveClass(e);
-    this.hasSnippets();
-  };
-
-  filterLanguage = e => {
-    this.setState({ initialSnippets: this.state.snippets });
-    this.setState({
-      activeSnippet: 0
-    });
-    const clickedLang = e.target.textContent;
-    let updatedList = this.state.snippets; //reset list when another is clicked
-    updatedList = updatedList.filter(snippet => {
-      if (snippet.languages) {
-        return (
-          //TODO clean this snippet.languages[0] === clickedLang ||
-          snippet.languages[0] === clickedLang ||
-          snippet.languages[1] === clickedLang ||
-          snippet.languages[2] === clickedLang ||
-          snippet.languages[3] === clickedLang ||
-          snippet.languages[4] === clickedLang ||
-          snippet.languages[5] === clickedLang
-        );
-      }
-    });
-    this.setState({ initialSnippets: updatedList });
-    this.setActiveClass(e);
-    this.hasSnippets();
-  };
-
-  filterLabel = e => {
-    this.setActiveClass(e);
-    this.setState({ initialSnippets: this.state.snippets });
-
-    const value = e.currentTarget.textContent.toLowerCase();
-    let updatedList = this.state.snippets; //reset list when another is clicked
-    updatedList = updatedList.filter(snippet => {
-      return (
-        //TODO clean this
-        snippet.labels[0] === value ||
-        snippet.labels[1] === value ||
-        snippet.labels[2] === value ||
-        snippet.labels[3] === value ||
-        snippet.labels[4] === value ||
-        snippet.labels[5] === value
-      );
-    });
-    this.setState({
-      activeSnippet: 0
-    });
-    this.setState({ initialSnippets: updatedList });
-    this.hasSnippets();
-  };
-
-  filterFavorites = e => {
-    this.setState({
-      activeSnippet: 0
-    });
-    this.setActiveClass(e);
-
-    var here = this;
-    var delay = (function() {
-      var timer = 0;
-      return function(callback, ms) {
-        clearTimeout(timer);
-        timer = setTimeout(callback, ms);
-      };
-    })();
-
-    delay(function() {
-      here.setState({ initialSnippets: here.state.snippets });
-      let updatedList = here.state.initialSnippets;
-      updatedList = updatedList.filter(snippet => {
-        return snippet.favorite === true;
-      });
-      here.setState({ initialSnippets: updatedList });
-    }, 1);
-    this.hasSnippets();
-  };
-
-  getAllLanguages = () => {
-    let allLangs = [];
-    let filteredLangs = [];
-
-    // get every value and spread it in a new arr
-    for (let i = 0; i < this.state.snippets.length; i++) {
-      if (this.state.snippets[i].languages) {
-        allLangs.push(...this.state.snippets[i].languages);
-      }
-    }
-    // rm duplicates from combined arr
-    filteredLangs = removeDuplicates(allLangs);
-    this.setState({ languages: filteredLangs });
-  };
-
-  /***** 
-    --- MODAL ---
-  *****/
-  openModal = () => {
-    this.setState({
-      visible: true
-    });
-  };
-
-  closeModal = () => {
-    this.setState({
-      visible: false
-    });
-  };
-
-  /***** 
-    --- FIREBASE ---
-  *****/
+  // Sync snippets of current user
   syncFirebase = () => {
     const here = this;
     if (firebase.auth().currentUser) {
@@ -205,6 +50,7 @@ class App extends Component {
     }
   };
 
+  // Set all statuses
   waitForSnippets = input => {
     if (firebase.auth().currentUser) {
       const userId = firebase.auth().currentUser.uid;
@@ -234,6 +80,7 @@ class App extends Component {
     }
   };
 
+  // If user makes changes => sync
   authChange = () => {
     const here = this;
     firebase.auth().onAuthStateChanged(function(user) {
@@ -243,10 +90,13 @@ class App extends Component {
     });
   };
 
+  // When user logges is
   authHandler = async authData => {
     var here = this;
     const name = firebase.auth().currentUser.displayName;
-    toast('Hi ' + name, { autoClose: 3000 });
+    if (!name) {
+      toast('Hi ' + name, { autoClose: 3000 });
+    }
     var delay = (function() {
       var timer = 0;
       return function(callback, ms) {
@@ -277,7 +127,153 @@ class App extends Component {
   };
 
   /***** 
-    --- SNIPPET ---
+     SIDEBAR 
+  *****/
+  // Make a copy of snippets & set hasSnippets status
+  showAllSnippets = e => {
+    this.setState({ initialSnippets: this.state.snippets });
+    this.setActiveClass(e);
+    this.hasSnippets();
+  };
+
+  // Adds label to the sidebar
+  addLabel = labelName => {
+    let labels = this.state.labels;
+    labels.push(labelName);
+    this.setState({
+      labels
+    });
+  };
+
+  // Set languages in sidebar
+  getAllLanguages = () => {
+    let allLangs = [];
+    let filteredLangs = [];
+
+    // get every value and spread it in a new arr
+    for (let i = 0; i < this.state.snippets.length; i++) {
+      if (this.state.snippets[i].languages) {
+        allLangs.push(...this.state.snippets[i].languages);
+      }
+    }
+    filteredLangs = removeDuplicates(allLangs); // rm duplicates from combined arr
+    this.setState({
+      languages: filteredLangs
+    });
+  };
+
+  // Adds class to clicked link in sidebar
+  setActiveClass = e => {
+    const selector = e.currentTarget;
+    const all = document.querySelectorAll('.sidebar__link');
+    for (let i = 0; i < all.length; i++) {
+      all[i].classList.remove('sidebar__link--active');
+    }
+    selector.classList.add('sidebar__link--active');
+  };
+
+  // Labels in a snippet
+  setLabel = labelArr => {
+    const snippets = this.state.snippets;
+    snippets[this.state.activeSnippet].labels = labelArr;
+    this.setState({
+      snippets
+    });
+  };
+
+  // Shows all snippets with corresponding language
+  filterLanguage = e => {
+    this.setState({ initialSnippets: this.state.snippets });
+    this.setState({ activeSnippet: 0 });
+    const clickedLang = e.target.textContent;
+    let updatedList = this.state.snippets; //reset list when another is clicked
+    updatedList = updatedList.filter(snippet => {
+      if (snippet.languages) {
+        return (
+          //TODO clean this snippet.languages[0] === clickedLang ||
+          snippet.languages[0] === clickedLang ||
+          snippet.languages[1] === clickedLang ||
+          snippet.languages[2] === clickedLang ||
+          snippet.languages[3] === clickedLang ||
+          snippet.languages[4] === clickedLang ||
+          snippet.languages[5] === clickedLang
+        );
+      }
+    });
+    this.setState({ initialSnippets: updatedList });
+    this.setActiveClass(e);
+    this.hasSnippets();
+  };
+
+  // Shows all snippets with corresponding label
+  filterLabel = e => {
+    this.setActiveClass(e);
+    this.setState({ initialSnippets: this.state.snippets });
+
+    const value = e.currentTarget.textContent.toLowerCase();
+    let updatedList = this.state.snippets; //reset list when another is clicked
+    updatedList = updatedList.filter(snippet => {
+      return (
+        //TODO clean this
+        snippet.labels[0] === value ||
+        snippet.labels[1] === value ||
+        snippet.labels[2] === value ||
+        snippet.labels[3] === value ||
+        snippet.labels[4] === value ||
+        snippet.labels[5] === value
+      );
+    });
+    this.setState({
+      activeSnippet: 0
+    });
+    this.setState({ initialSnippets: updatedList });
+    this.hasSnippets();
+  };
+
+  // Shows all favorite snippets
+  filterFavorites = e => {
+    this.setState({
+      activeSnippet: 0
+    });
+    this.setActiveClass(e);
+
+    var here = this;
+    var delay = (function() {
+      var timer = 0;
+      return function(callback, ms) {
+        clearTimeout(timer);
+        timer = setTimeout(callback, ms);
+      };
+    })();
+
+    delay(function() {
+      here.setState({ initialSnippets: here.state.snippets }); // filter over all snippets
+      let updatedList = here.state.initialSnippets;
+      updatedList = updatedList.filter(snippet => {
+        return snippet.favorite === true; // check if fav
+      });
+      here.setState({ initialSnippets: updatedList }); // update
+    }, 1);
+    this.hasSnippets();
+  };
+
+  /***** 
+     MODAL 
+  *****/
+  openModal = () => {
+    this.setState({
+      visible: true
+    });
+  };
+
+  closeModal = () => {
+    this.setState({
+      visible: false
+    });
+  };
+
+  /***** 
+     SNIPPET 
   *****/
   addSnippet = snippet => {
     const snippets = [...this.state.snippets];
@@ -286,7 +282,6 @@ class App extends Component {
       snippets,
       initialSnippets: snippets
     });
-
     this.syncFirebase();
     this.closeModal();
     this.getAllLanguages();
@@ -350,6 +345,10 @@ class App extends Component {
     this.setState({ initialSnippets: updatedList });
   };
 
+  /***** 
+   Statusses / Stati ?? 
+  *****/
+
   hasInitialSnippets = () => {
     var here = this;
     var delay = (function() {
@@ -379,7 +378,7 @@ class App extends Component {
   };
 
   /***** 
-    --- REACT ---
+     Lifecycles
   *****/
   componentDidMount() {
     var here = this;
