@@ -163,10 +163,7 @@ class SnippetDetail extends React.Component {
                     alt=""
                   />
                 )}
-                <select
-                  onClick={this.props.editSnippet}
-                  onChange={this.setLabel}
-                >
+                <select onChange={this.setLabel}>
                   <option selected disabled value="label">
                     Labels
                   </option>
