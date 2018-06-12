@@ -645,7 +645,8 @@ header {
       align-items: center; }
       .snippet-detail__label-bar__control img {
         margin-right: 20px;
-        width: 40px;
+        min-width: 30px;
+        max-width: 30px;
         height: 40px;
         transition: 0.28s all ease;
         cursor: pointer;
