@@ -11,6 +11,7 @@ class Sidebar extends React.Component {
     addLabel: false
   };
 
+  // Set references
   titleRef = React.createRef();
   addLabelRef = React.createRef();
   descriptionRef = React.createRef();
@@ -20,6 +21,7 @@ class Sidebar extends React.Component {
     this.state.snippetCode[key] = snippetCode;
   };
 
+  // Add file in editor
   addFile = e => {
     const fileComponents = this.state.fileComponents;
     fileComponents.push('comp');
@@ -36,6 +38,7 @@ class Sidebar extends React.Component {
     });
   };
 
+  // Get language from editor
   getLang = (language, key) => {
     const lang = this.state.lang;
     lang[key] = language;
@@ -45,6 +48,7 @@ class Sidebar extends React.Component {
     });
   };
 
+  // Create snippet object and add to snippets
   createSnippet = e => {
     e.preventDefault();
     const snippet = {
@@ -59,10 +63,10 @@ class Sidebar extends React.Component {
     };
     this.props.addSnippet(snippet);
     e.currentTarget.reset();
-
     console.log(snippet);
   };
 
+  // Add custom label
   createLabel = e => {
     e.preventDefault();
     const labelName = this.addLabelRef.current.value;
@@ -71,6 +75,7 @@ class Sidebar extends React.Component {
     e.currentTarget.reset();
   };
 
+  // Show label input
   toggleLabelAdd = () => {
     this.setState({
       addLabel: !this.state.addLabel

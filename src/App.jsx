@@ -190,7 +190,7 @@ class App extends Component {
     updatedList = updatedList.filter(snippet => {
       if (snippet.languages) {
         return (
-          //TODO clean this snippet.languages[0] === clickedLang ||
+          //TODO clean this
           snippet.languages[0] === clickedLang ||
           snippet.languages[1] === clickedLang ||
           snippet.languages[2] === clickedLang ||

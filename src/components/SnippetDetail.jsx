@@ -26,9 +26,11 @@ class SnippetDetail extends React.Component {
     editModal: false
   };
 
+  // Set references
   titleRef = React.createRef();
   descriptionRef = React.createRef();
 
+  // Add label to snippet
   setLabel = e => {
     const snippets = this.props.snippets;
     let labelArr = this.props.snippets[this.props.activeSnippet].labels;
@@ -52,6 +54,7 @@ class SnippetDetail extends React.Component {
     this.props.setLabel(labelArr);
   };
 
+  // Copy editor code
   copyCode = () => {
     this.setState({ copied: true });
     var here = this;
