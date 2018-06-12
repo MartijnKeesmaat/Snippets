@@ -6,7 +6,7 @@ import { getCurrentDate, getCurrentTime } from '../helpers';
 class Sidebar extends React.Component {
   state = {
     snippetCode: [''],
-    fileComponents: ['comp'],
+    fileComponents: [],
     lang: [],
     addLabel: false
   };

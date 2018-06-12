@@ -17,7 +17,6 @@ class Header extends React.Component {
 
         {this.props.isLoggedIn === false ? (
           <div className="account">
-            {/* <a href="">E-mail</a> */}
             <a onClick={() => this.props.authenticate('Github')}>
               Log in with Github
             </a>

@@ -47,30 +47,30 @@ class Editor extends React.Component {
       enableSnippets: false,
       showLineNumbers: true
     };
-    this.setMode = this.setMode.bind(this);
-    this.onChange = this.onChange.bind(this);
+    // this.setMode = this.setMode.bind(this);
+    // this.onChange = this.onChange.bind(this);
   }
 
-  onChange(newValue) {
-    this.setState({
-      value: newValue
-    });
-    this.props.getSnippetCode(this.state.value, this.props.index);
-  }
+  // onChange(newValue) {
+  //   this.setState({
+  //     value: newValue
+  //   });
+  //   this.props.getSnippetCode(this.state.value, this.props.index);
+  // }
 
-  setMode(e) {
-    this.setState({
-      mode: e.target.value
-    });
-    this.props.getLang(e.target.value, this.props.index);
-  }
+  // setMode(e) {
+  //   this.setState({
+  //     mode: e.target.value
+  //   });
+  //   this.props.getLang(e.target.value, this.props.index);
+  // }
 
-  componentDidMount() {
-    console.log(this.props.index);
-    if (this.props.index) {
-      this.props.getLang(this.state.mode, this.props.index);
-    }
-  }
+  // componentDidMount() {
+  //   console.log(this.props.index);
+  //   if (this.props.index) {
+  //     this.props.getLang(this.state.mode, this.props.index);
+  //   }
+  // }
 
   render() {
     return (
@@ -82,8 +82,8 @@ class Editor extends React.Component {
               <span className="select">
                 <select
                   name="mode"
-                  onChange={this.setMode}
-                  value={this.state.mode}
+                  // onChange={this.setMode}
+                  // value={this.state.mode}
                 >
                   {languages.map(lang => (
                     <option key={lang} value={lang}>
@@ -96,7 +96,7 @@ class Editor extends React.Component {
           </div>
           <a
             className="editor-detail__top__del"
-            onClick={() => this.props.removeFile(this.props.index)}
+            // onClick={() => this.props.removeFile(this.props.index)}
           >
             &times;
           </a>

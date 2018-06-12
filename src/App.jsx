@@ -316,8 +316,13 @@ class App extends Component {
     });
   };
 
-  editSnippet = () => {
-    // toast("Doesn't work yet :(", { autoClose: 3000 });
+  editSnippet = (title, desc) => {
+    const snippets = this.state.snippets;
+    snippets[this.state.activeSnippet].title = title;
+    snippets[this.state.activeSnippet].description = desc;
+    this.setState({
+      snippets
+    });
   };
 
   setFavorite = snippetIndex => {
@@ -446,6 +451,7 @@ class App extends Component {
               isLoading={this.state.isLoading}
               hasSnippets={this.state.hasSnippets}
               hasInitialSnippets={this.state.hasInitialSnippets}
+              closeModal={this.closeModal}
             />
           </main>
         </div>

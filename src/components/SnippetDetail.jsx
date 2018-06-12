@@ -1,9 +1,11 @@
 import React from 'react';
 import AceEditor from 'react-ace';
+import Modal from 'react-awesome-modal';
+import Editor from './EditorChange';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import 'brace/ext/language_tools';
 import 'brace/ext/searchbox';
 import 'brace/theme/tomorrow';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const defaultValue = '';
 
@@ -20,8 +22,12 @@ class SnippetDetail extends React.Component {
     highlightActiveLine: true,
     enableSnippets: false,
     showLineNumbers: true,
-    copied: false
+    copied: false,
+    editModal: false
   };
+
+  titleRef = React.createRef();
+  descriptionRef = React.createRef();
 
   setLabel = e => {
     const snippets = this.props.snippets;
@@ -62,6 +68,22 @@ class SnippetDetail extends React.Component {
     }, 3000);
   };
 
+  openModal = () => {
+    this.setState({ editModal: true });
+  };
+
+  closeModal = () => {
+    this.setState({ editModal: false });
+  };
+
+  updateSnippet = e => {
+    e.preventDefault();
+    const title = this.titleRef.current.value;
+    const desc = this.descriptionRef.current.value;
+    this.props.editSnippet(title, desc);
+    this.closeModal();
+  };
+
   render() {
     const snippets = this.props.initialSnippets;
     const snippetIndex = this.props.activeSnippet;
@@ -90,7 +112,7 @@ class SnippetDetail extends React.Component {
 
               <div className="snippet-detail__controls">
                 <img
-                  onClick={this.props.editSnippet}
+                  onClick={() => this.openModal()}
                   src={require('../icons/edit.svg')}
                   alt=""
                 />
@@ -207,6 +229,68 @@ class SnippetDetail extends React.Component {
                 </div>
               ))}
           </div>
+
+          <Modal
+            visible={this.state.editModal}
+            width="800"
+            effect="fadeInUp"
+            onClickAway={() => this.closeModal()}
+          >
+            <div className="modal">
+              <div className="modal__inner">
+                <h3>Edit snippet</h3>
+
+                <form
+                  onSubmit={this.updateSnippet}
+                  className="add-snippet-form"
+                >
+                  <label>Title</label>
+                  <input
+                    name="title"
+                    ref={this.titleRef}
+                    type="text"
+                    placeholder="Title"
+                    required
+                    defaultValue={
+                      this.props.snippets[this.props.activeSnippet].title
+                    }
+                  />
+                  <label>Description</label>
+                  <textarea
+                    defaultValue={
+                      this.props.snippets[this.props.activeSnippet].description
+                    }
+                    name="description"
+                    ref={this.descriptionRef}
+                    placeholder="Description"
+                    id=""
+                    cols="20"
+                    rows="5"
+                  />
+
+                  {this.props.snippets[this.props.activeSnippet].files.map(
+                    (code, key) => (
+                      <Editor
+                        required
+                        key={key}
+                        index={key}
+                        // getFileCode={this.getFileCode}
+                        // addSnippet={this.addSnippet}
+                        // getSnippetCode={this.getSnippetCode}
+                        // getLang={this.getLang}
+                      />
+                    )
+                  )}
+                  <button type="submit" className="btn">
+                    Update snippet
+                  </button>
+                </form>
+                <a className="modal-close" onClick={this.props.closeModal}>
+                  &times;
+                </a>
+              </div>
+            </div>
+          </Modal>
         </div>
       );
     } else if (!this.props.hasSnippets && this.props.isLoading) {
