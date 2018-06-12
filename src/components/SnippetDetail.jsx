@@ -69,6 +69,13 @@ class SnippetDetail extends React.Component {
   };
 
   openModal = () => {
+    // Update content of modal to selected snippet
+    const currentTitle = this.props.snippets[this.props.activeSnippet].title;
+    const currentDesc = this.props.snippets[this.props.activeSnippet]
+      .description;
+    this.titleRef.current.value = currentTitle;
+    this.descriptionRef.current.value = currentDesc;
+
     this.setState({ editModal: true });
   };
 
