@@ -189,7 +189,13 @@ class SnippetDetail extends React.Component {
 
             <hr />
 
+            {snippets[snippetIndex].files[0] === '' ||
+              (snippets[snippetIndex].languages === undefined && (
+                <p>No code added</p>
+              ))}
+
             {snippets[snippetIndex].files[0] !== '' &&
+              snippets[snippetIndex].languages !== undefined &&
               snippets[snippetIndex].files.map((key, index) => (
                 <div className="editor-detail card" key={index}>
                   <div className="editor-detail__top">
