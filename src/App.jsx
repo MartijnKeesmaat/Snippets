@@ -151,7 +151,10 @@ class App extends Component {
 
     // get every value and spread it in a new arr
     for (let i = 0; i < this.state.snippets.length; i++) {
-      if (this.state.snippets[i].languages) {
+      if (
+        this.state.snippets[i].languages &&
+        this.state.snippets[i].languages !== ''
+      ) {
         allLangs.push(...this.state.snippets[i].languages);
       }
     }
