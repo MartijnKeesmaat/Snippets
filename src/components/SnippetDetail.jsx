@@ -281,19 +281,19 @@ class SnippetDetail extends React.Component {
                     rows="5"
                   />
 
-                  {this.props.snippets[this.props.activeSnippet].files.map(
+                  {/* {this.props.snippets[this.props.activeSnippet].files.map(
                     (code, key) => (
                       <Editor
                         required
                         key={key}
                         index={key}
-                        // getFileCode={this.getFileCode}
-                        // addSnippet={this.addSnippet}
-                        // getSnippetCode={this.getSnippetCode}
-                        // getLang={this.getLang}
+                        getFileCode={this.getFileCode}
+                        addSnippet={this.addSnippet}
+                        getSnippetCode={this.getSnippetCode}
+                        getLang={this.getLang}
                       />
                     )
-                  )}
+                  )} */}
                   <button type="submit" className="btn">
                     Update snippet
                   </button>

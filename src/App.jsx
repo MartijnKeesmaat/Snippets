@@ -344,6 +344,10 @@ class App extends Component {
         title.search(searchedValue) !== -1 || desc.search(searchedValue) !== -1
       ); //search returns position if not found, -1
     });
+
+    if (updatedList.length <= 1) {
+      this.setState({ activeSnippet: 0 });
+    }
     this.setState({ initialSnippets: updatedList });
   };
 
