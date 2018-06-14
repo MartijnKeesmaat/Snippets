@@ -66,7 +66,6 @@ class Editor extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.index);
     if (this.props.index) {
       this.props.getLang(this.state.mode, this.props.index);
     }
