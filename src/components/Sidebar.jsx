@@ -102,6 +102,15 @@ class Sidebar extends React.Component {
     this.props.filterLabel(e);
   };
 
+  openModal = () => {
+    console.log('asdf');
+
+    this.setState({
+      fileComponents: []
+    });
+    this.props.openModal();
+  };
+
   render() {
     return (
       <div>
@@ -116,7 +125,7 @@ class Sidebar extends React.Component {
                     ? 'btn--glow'
                     : '')
                 }
-                onClick={this.props.openModal}
+                onClick={() => this.openModal()}
               >
                 Add snippet
               </button>
