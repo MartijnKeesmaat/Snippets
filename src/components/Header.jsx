@@ -8,7 +8,6 @@ class Header extends React.Component {
   render() {
     return (
       <header>
-        <a href="">Filter</a>
         <input
           type="text"
           placeholder="Search on title or description"

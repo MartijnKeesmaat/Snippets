@@ -7,7 +7,7 @@ class Sidebar extends React.Component {
   state = {
     snippetCode: [''],
     fileComponents: [],
-    lang: [],
+    lang: ['javascript'],
     addLabel: false
   };
 

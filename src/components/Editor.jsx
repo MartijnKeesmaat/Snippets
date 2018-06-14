@@ -36,7 +36,7 @@ class Editor extends React.Component {
     super(props);
     this.state = {
       value: '//code here',
-      mode: 'Javascript',
+      mode: 'javascript',
       theme: 'github',
       enableBasicAutocompletion: false,
       enableLiveAutocompletion: false,
